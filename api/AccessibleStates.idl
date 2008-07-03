@@ -4,7 +4,8 @@
  *
  *  IAccessible2 IDL Specification
  *
- *  Copyright (c) IBM Corp. 2007
+ *  Copyright (c) Linux Foundation 2007, 2008
+ *  Copyright (c) IBM Corp. 2006
  *  Copyright (c) Sun Microsystems, Inc. 2000, 2006
  *
  *  This library is free software; you can redistribute it and/or
@@ -28,14 +29,33 @@ import "objidl.idl";
 typedef long AccessibleStates;
 
 /** @defgroup grpStates States
- IAccessible2 state constants.
+ IAccessible2 state constants returned by IAccessible2::states.
 */
 ///@{
 
-/** Indicates a window is currently the active window. */
+/** Indicates a window is currently the active window, or is an active subelement 
+  within a container or table.
+
+ This state can be used to indicate the current active item in a container, even 
+  if the container itself is not currently active. In other words this would indicate
+  the item that will get focus if you tab to the container.
+
+ This information is important for knowing what to report for trees and potentially 
+  other containers in a virtual buffer. 
+*/
 const long IA2_STATE_ACTIVE =					0x1;
 
-/** Indicates that the object is armed. */
+/** Indicates that the object is armed.
+
+ Used to indicate that the control is "pressed" and will be invoked when the 
+  actuator, e.g. a mouse button, is "released".  An AT which either monitors the 
+  mouse or synthesizes mouse events might need to know that, and possibly a talking
+  interface would even let the user know about it.  It could also potentially be
+  useful to on screen keyboards or test tools since the information does indicate
+  something about the state of the interface, for example, code operating asynchronously
+  might need to wait for the armed state to change before doing something else.
+
+*/
 const long IA2_STATE_ARMED =					0x2;
 
 /** Indicates the user interface object corresponding to this object no longer exists. */
@@ -99,19 +119,29 @@ const long IA2_STATE_SINGLE_LINE =				0x2000;
  This state is used when the accessible object no longer accurately 
   represents the state of the object which it is representing such as when an
   object is transient or when an object has been or is in the process of being
-  destroyed.
+  destroyed or when the object's index in its parent has changed.
 */
 const long IA2_STATE_STALE =					0x4000;
 
 /** Indicates that the object implements autocompletion.
 
- This state indicates that that a text control will respond to the input of 
+ This state indicates that a text control will respond to the input of 
  one ore more characters and cause a sub-item to become selected.  The 
  selection may also result in events fired on the parent object.
 */
 const long IA2_STATE_SUPPORTS_AUTOCOMPLETION =	0x8000;
 
-/** Indicates this object is transient. */
+/** Indicates this object is transient.
+
+ An object has this state when its parent object has the state ::IA2_STATE_MANAGES_DESCENDANTS.
+ For example, a list item object may be managed by its parent list object and may only 
+ exist as long as the object is actually rendered.  Similarly a table cell's accessible 
+ object may exist only while the cell has focus.  However, from the perspective of an 
+ assistive technology a transient object behaves like a non-transient object.  As a 
+ result it is likely that this state is not of use to an assistive technology, but it 
+ is provided in case an assistive technology determines that knowledge of the transient 
+ nature of the object is useful and also for harmony with the Linux accessibility API.
+ */
 const long IA2_STATE_TRANSIENT =				0x10000;
 
 /** Indicates the orientation of this object is vertical. */

@@ -4,6 +4,7 @@
  *
  *  IAccessible2 IDL Specification
  *
+ *  Copyright (c) Linux Foundation 2007, 2008
  *  Copyright (c) IBM Corp. 2006
  *  Copyright (c) Sun Microsystems, Inc. 2000, 2006
  *
@@ -19,7 +20,7 @@
  *
  *  You should have received a copy of the GNU Lesser General Public
  *  License along with this library; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02110-1301  USA
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  ************************************************************************/
 
@@ -95,6 +96,7 @@ interface IAccessibleRelation : IUnknown
 {
   /** @brief Returns the type of the relation.
    @param [out] relationType
+   @retval S_OK
   */
   [propget] HRESULT relationType
     (
@@ -103,6 +105,7 @@ interface IAccessibleRelation : IUnknown
 
   /** @brief Returns a localized version of the relation type.
    @param [out] localizedRelationType
+   @retval S_OK
   */
   [propget] HRESULT localizedRelationType
     (
@@ -111,6 +114,7 @@ interface IAccessibleRelation : IUnknown
 
   /** @brief Returns the number of targets for this relation.
    @param [out] nTargets
+   @retval S_OK
   */
   [propget] HRESULT nTargets
     (
@@ -121,7 +125,10 @@ interface IAccessibleRelation : IUnknown
    @param [in] targetIndex
     0 based index
    @param [out] target
-    Note: Use QueryInterface to get IAccessible2.
+   @retval S_OK
+   @retval S_FALSE if there is nothing to return, [out] value is NULL
+   @retval E_INVALIDARG if bad [in] passed, [out] value is NULL 
+   @note Use QueryInterface to get IAccessible2.
   */
   [propget] HRESULT target
     (
@@ -131,17 +138,22 @@ interface IAccessibleRelation : IUnknown
 
   /** @brief Returns multiple accessible relation targets
    @param [in] maxTargets
-    Maximum number of targets to get.
-   @param [out] target
-    Array of accessible targets. Use QueryInterface to get IAccessible2.
+    maximum size of the array allocated by the client
+   @param [out] targets
+    The array of target objects.  Note that this array is to be allocated by the
+	client and freed when no longer needed.  Refer to @ref _arrayConsideration 
+	"Special Consideration when using Arrays" for more details.  You will need to use 
+	QueryInterface on the IUnknown to get the IAccessible2.
    @param [out] nTargets
-    length of array (not more than maxTargets)
+	actual number of targets in the returned array (not more than maxTargets)
+   @retval S_OK
+   @retval S_FALSE if there is nothing to return, nTargets is set to 0
   */
   [propget] HRESULT targets
     (
      [in] long maxTargets, 
      [out, size_is(maxTargets), length_is(*nTargets)]
-       IUnknown **target, 
+       IUnknown **targets, 
      [out, retval] long *nTargets 
     );
 

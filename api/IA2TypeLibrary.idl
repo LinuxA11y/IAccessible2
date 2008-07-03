@@ -4,7 +4,8 @@
  *
  *  IAccessible2 IDL Specification
  *
- *  Copyright (c) IBM Corp. 2007
+ *  Copyright (c) Linux Foundation 2007, 2008
+ *  Copyright (c) IBM Corp. 2006
  *  Copyright (c) Sun Microsystems, Inc. 2000, 2006
  *
  *  This library is free software; you can redistribute it and/or
@@ -39,8 +40,8 @@ cpp_quote("")
 
 library IAccessible2Lib
 {
-	importlib ("stdole2.tlb");
-	interface Accessible2;
+    importlib ("stdole2.tlb");
+    interface IAccessible2;
     interface IAccessibleAction;
     interface IAccessibleApplication;
     interface IAccessibleComponent;

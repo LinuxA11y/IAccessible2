@@ -4,7 +4,8 @@
  *
  *  IAccessible2 IDL Specification
  *
- *  Copyright (c) IBM Corp. 2007
+ *  Copyright (c) Linux Foundation 2007, 2008
+ *  Copyright (c) IBM Corp. 2006
  *  Copyright (c) Sun Microsystems, Inc. 2000, 2006
  *
  *  This library is free software; you can redistribute it and/or
@@ -36,6 +37,10 @@ enum IA2EventID {
   */
   IA2_EVENT_ACTIVE_DECENDENT_CHANGED,
 
+  /** Alternative constant with correct spelling.
+  */
+  IA2_EVENT_ACTIVE_DESCENDANT_CHANGED = IA2_EVENT_ACTIVE_DECENDENT_CHANGED,
+
   /** The document wide attributes of the document object have changed.
   */
   IA2_EVENT_DOCUMENT_ATTRIBUTE_CHANGED,
@@ -60,7 +65,7 @@ enum IA2EventID {
   */
   IA2_EVENT_HYPERLINK_END_INDEX_CHANGED,
 
-  /** The number of anchors assoicated with this hyperlink object has changed.
+  /** The number of anchors associated with this hyperlink object has changed.
   */
   IA2_EVENT_HYPERLINK_NUMBER_OF_ANCHORS_CHANGED,
 
@@ -142,8 +147,7 @@ enum IA2EventID {
   */
   IA2_EVENT_TEXT_CARET_MOVED,
 
-  /** This event indicates general text changes, i.e. changes to text that is 
-    exposed through the IAccessibleText and IAccessibleEditableText interfaces.
+  /** <b>Deprecated.</b>  This event is equivalent to ::IA2_EVENT_TEXT_UPDATED.
   */
   IA2_EVENT_TEXT_CHANGED,
 
@@ -159,15 +163,22 @@ enum IA2EventID {
   */
   IA2_EVENT_TEXT_REMOVED,
 
-  /** Text was updated.
+  /** This event indicates general text changes, i.e. changes to text that are 
+    exposed through the IAccessibleText interface.  For compatibility with ATK/AT-SPI
+	which does not have an equivalent event, servers can alternatively fire 
+	::IA2_EVENT_TEXT_REMOVED and ::IA2_EVENT_TEXT_INSERTED.
   */
   IA2_EVENT_TEXT_UPDATED,
 
-  /** The text selection changed.
+  /** The text selection changed.  Later versions of Microsoft development environments 
+   have an equivalent event identified, EVENT_OBJECT_TEXTSELECTIONCHANGED.  Servers 
+   should use that if it is available and use IA2_EVENT_TEXT_SELECTION_CHANGED otherwise.  
+   Clients should be prepared to respond to either event.
+
   */
   IA2_EVENT_TEXT_SELECTION_CHANGED,
 
-  /** A visibile data event indicates the change of the visual appearance
+  /** A visible data event indicates the change of the visual appearance
     of an accessible object.  This includes for example most of the
     attributes available via the IAccessibleComponent interface.
   */

@@ -4,6 +4,7 @@
  *
  *  IAccessible2 IDL Specification
  *
+ *  Copyright (c) Linux Foundation 2007, 2008
  *  Copyright (c) IBM Corp. 2006
  *  Copyright (c) Sun Microsystems, Inc. 2000, 2006
  *
@@ -35,8 +36,8 @@ import "AccessibleAction.idl";
   single link or a collection of links such as when the non-text object is 
   an image map.
 
- Linked objects and anchors are implementation dependent. This interface is 
-  derived from IAccessibleAction.  IAccessibleAction::nActions indicates the 
+ Linked objects and anchors are implementation dependent. This interface is derived
+  from IAccessibleAction.  IAccessibleAction::nActions is one greater than the 
   maximum value for the indices used with the methods of this interface.
         
  Furthermore, the object that implements this interface has to be connected 
@@ -56,9 +57,13 @@ interface IAccessibleHyperlink : IAccessibleAction
     index is indicated by IAccessibleAction::nActions.
    @param [out] anchor
     This is an implementation dependent value.  For example, for a text link this 
-	method could return the substring of the containing string where the subsgtring
+	method could return the substring of the containing string where the substring
 	is overridden with link behavior, and for an image link this method could return 
-	an IUnknown VARIANT for IAccessibleImage.
+	an IUnknown VARIANT for IAccessibleImage.  See the section about 
+	@ref _variants "VARIANTs" for additional information.
+   @retval S_OK
+   @retval S_FALSE if there is nothing to return, [out] value is NULL 
+   @retval E_INVALIDARG if bad [in] passed, [out] value is NULL 
   */
   [propget] HRESULT anchor
     (
@@ -76,7 +81,11 @@ interface IAccessibleHyperlink : IAccessibleAction
     This is an implementation dependent value.  For example this method could
 	return a BSTR VARIANT of the URI.  Alternatively this method could return an
 	IUnknown VARIANT of a COM interface representing a target object to be 
-	activated when the link is activated.
+	activated when the link is activated.  See the section about 
+	@ref _variants "VARIANTs" for additional information.
+   @retval S_OK
+   @retval S_FALSE if there is nothing to return, [out] value is NULL 
+   @retval E_INVALIDARG if bad [in] passed, [out] value is NULL 
   */
   [propget] HRESULT anchorTarget
     (
@@ -84,22 +93,24 @@ interface IAccessibleHyperlink : IAccessibleAction
      [out, retval] VARIANT *anchorTarget
     );
 
-  /** @brief Returns the index at which the textual representation of the hyperlink starts.
+  /** @brief Returns the 0 based character offset at which the textual representation of the hyperlink starts.
 
    The returned value is related to the IAccessibleText interface of the object that 
    owns this hyperlink. 
    @param [out] index
+   @retval S_OK
   */
   [propget] HRESULT startIndex
     (
      [out, retval] long *index
     );
 
-  /** @brief Returns the index at which the textual rerpesentation of the hyperlink ends.
+  /** @brief Returns the 0 based character offset at which the textual representation of the hyperlink ends.
     
    The returned value is related to the IAccessibleText interface of the object that 
    owns this hyperlink. The character at the index is not part of the hypertext.  
    @param [out] index
+   @retval S_OK
   */
   [propget] HRESULT endIndex
     (
@@ -112,6 +123,8 @@ interface IAccessibleHyperlink : IAccessibleAction
    Returns TRUE if the referenced target is still valid and FALSE otherwise.
 
    @param [out] valid
+   @retval S_OK
+   @retval S_FALSE if there is nothing to return, [out] value is FALSE 
   */
   [propget] HRESULT valid
     (

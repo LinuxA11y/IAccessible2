@@ -4,7 +4,8 @@
  *
  *  IAccessible2 IDL Specification
  *
- *  Copyright (c) IBM Corp. 2007
+ *  Copyright (c) Linux Foundation 2007, 2008
+ *  Copyright (c) IBM Corp. 2006
  *  Copyright (c) Sun Microsystems, Inc. 2000, 2006
  *
  *  This library is free software; you can redistribute it and/or
@@ -19,45 +20,58 @@
  *
  *  You should have received a copy of the GNU Lesser General Public
  *  License along with this library; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02110-1301  USA
+ *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  *
  ************************************************************************/
 
-/// These constants control the scrolling of an object or substring into a window.
+/** These constants control the scrolling of an object or substring into a window.
+
+ This enum is used in IAccessible2::scrollTo and IAccessibleText::scrollSubstringTo.
+*/
 enum IA2ScrollType {
 
   /** Scroll the top left of the object or substring to the top left of the 
-   window (or as close as possible).
+   application's client area (or as close as possible).
   */
   IA2_SCROLL_TYPE_TOP_LEFT, 		
 
   /** Scroll the bottom right of the object or substring to the bottom right of
-   the window (or as close as possible). 
+   the application's client area (or as close as possible). 
   */
   IA2_SCROLL_TYPE_BOTTOM_RIGHT,
 
-  /** Scroll the top edge of the object or substring to the top edge of the 
-   window (or as close as possible). 
+  /** Scroll as much as possible of the top edge of the object or substring
+   as close as possible to the top edge of the application's client area.
   */
   IA2_SCROLL_TYPE_TOP_EDGE,
 
-  /** Scroll the bottom edge of the object or substring to the bottom edge of 
-   the window (or as close as possible). 
+  /** Scroll as much as possible of the bottom edge of the object or substring
+   as close as possible to the bottom edge of the application's client area.
   */
   IA2_SCROLL_TYPE_BOTTOM_EDGE, 
 
-  /** Scroll the left edge of the object or substring to the left edge of the 
-   window (or as close as possible). 
+  /** Scroll as much as possible of the left edge of the object or substring
+   as close as possible to the left edge of the application's client area.
   */
   IA2_SCROLL_TYPE_LEFT_EDGE, 
 
-  /** Scroll the right edge of the object or substring to the right edge of the 
-   window (or as close as possible). 
+  /** Scroll as much as possible of the right edge of the object or substring
+   as close as possible to the right edge of the application's client area.
   */
-  IA2_SCROLL_TYPE_RIGHT_EDGE 
+  IA2_SCROLL_TYPE_RIGHT_EDGE,
+
+  /** Scroll the object or substring a minimal amount such that as much as possible
+   of the object or substring is within the application's client area.
+  */
+  IA2_SCROLL_TYPE_ANYWHERE
 };
 
-/// These constants define which coordinate system a point is located in.
+/** These constants define which coordinate system a point is located in.
+ 
+ This enum is used in IAccessible2::scrollToPoint, IAccessibleImage::imagePosition,
+ IAccessibleText::characterExtents, and IAccessibleText::offsetAtPoint, and 
+ IAccessibleText::scrollSubstringToPoint.
+*/
 enum IA2CoordinateType {
 
   /// The coordinates are relative to the screen.
@@ -68,4 +82,17 @@ enum IA2CoordinateType {
   */
   IA2_COORDTYPE_PARENT_RELATIVE  
 
+};
+
+/** Special offsets for use in IAccessibleText and IAccessibleEditableText methods
+  
+  Refer to @ref _specialOffsets 
+  "Special Offsets for use in the IAccessibleText and IAccessibleEditableText Methods" 
+  for more information.
+*/
+enum IA2TextSpecialOffsets {
+  IA2_TEXT_OFFSET_LENGTH = -1,	/**< This offset is equivalent to the length of the string.  It eliminates
+								 the need to call IAccessibleText::nCharacters. */
+  IA2_TEXT_OFFSET_CARET = -2	/**< This offset signifies that the text related to the physical location
+								 of the caret should be used. */
 };
