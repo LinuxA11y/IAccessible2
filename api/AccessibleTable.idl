@@ -4,7 +4,7 @@
  *
  *  IAccessible2 IDL Specification
  *
- *  Copyright (c) IBM Corp. 2006
+ *  Copyright (c) IBM Corp. 2007
  *  Copyright (c) Sun Microsystems, Inc. 2000, 2006
  *
  *  This library is free software; you can redistribute it and/or
@@ -61,8 +61,8 @@ typedef struct {
 interface IAccessibleTable : IUnknown
 {
 
-  /** @brief Returns the IAccessible2 object at the specified row and column in 
-    the table.
+  /** @brief Returns the accessible object at the specified row and column in 
+    the table.  This object could be an IAccessible or an IAccessible2.
    @param [in] row
     The row index for which to retrieve the cell.
    @param [in] column
@@ -70,23 +70,24 @@ interface IAccessibleTable : IUnknown
    @param [out] accessible
     If both row and column index are valid then the corresponding accessible 
     object is returned that represents the requested cell regardless of whether 
-    the cell is currently  visible (on the screen).
+    the cell is currently visible (on the screen).
   */
   [propget] HRESULT accessibleAt
     (
      [in] long row, 
      [in] long column,
-     [out, retval] IAccessible2 **accessible 
+     [out, retval] IUnknown **accessible 
     );
 
-  /** @brief Returns the caption for the table.
+  /** @brief Returns the caption for the table.  The returned object could be 
+    an IAccessible or an IAccessible2.
    @param [out] accessible
     If the table has a caption then a reference to it is returned, else a NULL 
     pointer is returned.
   */
   [propget] HRESULT caption
     (
-     [out, retval] IAccessible2 **accessible 
+     [out, retval] IUnknown **accessible 
     );
 	  
   /** @brief Translates the given row and column indices into the corresponding child index.
@@ -181,6 +182,15 @@ interface IAccessibleTable : IUnknown
      [out, retval] long *rowCount 
     );
 
+  /** @brief Returns the total number of selected children
+   @param [out] childCount
+    Number of children currently selected
+  */
+  [propget] HRESULT nSelectedChildren
+    (
+	 [out, retval] long *childCount
+	);
+
   /** @brief Returns the total number of selected columns
    @param [out] columnCount
     Number of columns currently selected
@@ -256,19 +266,19 @@ interface IAccessibleTable : IUnknown
 	 [out, retval] long *rowIndex 
 	);
 
-  /** @brief Returns a list of row indexes currently selected (0-based).
-   @param [in] maxRows
-    Max rows requested (possibly from IAccessibleTable::nSelectedRows)
-   @param [out] rows
-    array of indexes of selected rows (each index is 0-based)
-   @param [out] nRows
-    Length of array (not more than maxRows)
+  /** @brief Returns a list of child indexes currently selected (0-based).
+   @param [in] maxChildren
+    Max children requested (possibly from IAccessibleTable::nSelectedChildren)
+   @param [out] children
+    array of indexes of selected children (each index is 0-based)
+   @param [out] nChildren
+    Length of array (not more than maxChildren)
   */
-  [propget] HRESULT selectedRows
+  [propget] HRESULT selectedChildren
     (
-     [in] long maxRows, 
-     [out, size_is(,maxRows), length_is(,*nRows)] long **rows, 
-     [out, retval] long *nRows 
+     [in] long maxChildren,
+     [out, size_is(,maxChildren), length_is(,*nChildren)] long **children,
+     [out, retval] long *nChildren
     );
 
   /** @brief Returns a list of column indexes currently selected (0-based).
@@ -286,7 +296,23 @@ interface IAccessibleTable : IUnknown
      [out, retval] long *nColumns
     );
 
-  /** @brief Returns the summary description of the table.
+  /** @brief Returns a list of row indexes currently selected (0-based).
+   @param [in] maxRows
+    Max rows requested (possibly from IAccessibleTable::nSelectedRows)
+   @param [out] rows
+    array of indexes of selected rows (each index is 0-based)
+   @param [out] nRows
+    Length of array (not more than maxRows)
+  */
+  [propget] HRESULT selectedRows
+    (
+     [in] long maxRows, 
+     [out, size_is(,maxRows), length_is(,*nRows)] long **rows, 
+     [out, retval] long *nRows 
+    );
+
+  /** @brief Returns the summary description of the table.  The returned object could be 
+    an IAccessible or an IAccessible2.
    @param [out] accessible
     Returns a reference to an implementation dependent accessible object 
     representing the table's summary or a NULL pointer if the table 
@@ -294,7 +320,7 @@ interface IAccessibleTable : IUnknown
   */
   [propget] HRESULT summary
     (
-     [out, retval] IAccessible2 **accessible 
+     [out, retval] IUnknown **accessible 
     );
 
   /** @brief Returns a boolean value indicating whether the specified column is 
