@@ -1,22 +1,24 @@
-How to build the IA2 IDL
+How to build the IA2 docs, a merged IDL file, a zip file containing the docs and IDL files.
 - The directory tree...
-  - IA2 contains:
+  - ia2 contains:
     - buildapi.sh: the build script (need cygwin bash shell interpreter installed)
     - doxygen.conf: the doxygen config file
     - a merged IDL file with all the IDL concatenated together
-    - zip file containing IDL and doxygen output
-    - a IA2API directory which contains:
-      - the IDL
-      - a docs directory which contains the doxygen generated output
-    - a IDL-Test directory which contains Visual Studio files for testing:
-      - IA2 IDL Test.dsp/dsw, UA2 Merged IDL Test.dsp, StdAfx.cpp/h
+    - a zip file containing IDL and doxygen output
+    - an api directory which contains the IDL
+    - a docs directory which contains the doxygen generated output
+    - an IDL-Test directory which contains Visual Studio files for testing:
+      - for VC6
+        - IA2 IDL Test.dsp/dsw, IA2 Merged IDL Test.dsp, StdAfx.cpp/h
+      - for VC 2008 Express
+        - IA2 IDL Test.sln/vcproj, IA2 Merged IDL Test.vcproj, StdAfx.cpp/h
 - The build procedure
-  - CD to the IA2 directory
+  - CD to the ia2 directory
   - sh buildapi.sh >sh.out
   - notepad sh.out (to check for errors)
   - the doxgen generated files, merged idl file, and the zip file will be built
-  - CD to the IA2\IDL-Test directory
-  - activate the dsw file
+  - CD to the ia2\IDL-Test directory
+  - activate the sln file
   - There are two projects, one for the individual idl files, one for the merged idl file
   - Build, Batch Build, Choose the non-merged IDL project
   - Fix any errors, save the fixes, and rebuild the project.
