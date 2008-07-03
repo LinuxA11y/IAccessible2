@@ -1,0 +1,29 @@
+How to build the IA2 IDL
+- The directory tree...
+  - IA2 contains:
+    - buildapi.sh: the build script (need cygwin bash shell interpreter installed)
+    - doxygen.conf: the doxygen config file
+    - a merged IDL file with all the IDL concatenated together
+    - zip file containing IDL and doxygen output
+    - a IA2API directory which contains:
+      - the IDL
+      - a docs directory which contains the doxygen generated output
+    - a IDL-Test directory which contains Visual Studio files for testing:
+      - IA2 IDL Test.dsp/dsw, UA2 Merged IDL Test.dsp, StdAfx.cpp/h
+- The build procedure
+  - CD to the IA2 directory
+  - sh buildapi.sh >sh.out
+  - notepad sh.out (to check for errors)
+  - the doxgen generated files, merged idl file, and the zip file will be built
+  - CD to the IA2\IDL-Test directory
+  - activate the dsw file
+  - There are two projects, one for the individual idl files, one for the merged idl file
+  - Build, Batch Build, Choose the non-merged IDL project
+  - Fix any errors, save the fixes, and rebuild the project.
+  - If there were errors, rebuild the merged file by rerunning buildapi.sh
+  - Build, Batch Build, Choose the merged IDL project
+  - Fix any errors in the original source IDLs or buildapi.sh that caused the problem
+  - Rerun the builapi.sh build script.
+
+  Note: Don't fix errors in the merged file; fix them in the correct source file.
+  
