@@ -44,6 +44,20 @@ import "AccessibleAction.idl";
   implicitly or explicitly with an object that implements IAccessibleText.
   IAccessibleHyperlink::startIndex and IAccessibleHyperlink::endIndex are
   indices with respect to the text exposed by IAccessibleText.
+
+ This interface provides access to a single object which can have multiple actions.
+  An example is an image map which is an image with multiple links each of which is
+  associated with separate non-overlapping area of the image.  This interface could
+  also be applied to other kinds of objects with multiple actions.
+
+ An interesting use case to consider is an image map where each area of the image
+  has multiple actions such as "Activate URI", "Copy URI to favorites", etc.  In
+  this case there are more actions than image areas.  This should not be an issue
+  however.  The user still has comprehensible access to all the actions associated
+  with the image.  The actions can be differentiated from each other using the per 
+  action name, description, and key binding.  For example two actions of the set
+  of actions could be "Activate Link - Texas Department of Transportation" and 
+  "Copy Link to Favorites - Texas Department of Transportation".
 */
 [object, uuid(01C20F2B-3DD2-400f-949F-AD00BDAB1D41)]
 interface IAccessibleHyperlink : IAccessibleAction

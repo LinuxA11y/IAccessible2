@@ -30,17 +30,19 @@ import "oleacc.idl";
         
 /** @brief This interface gives access to actions that can be executed
   for accessible objects.
-        
- Every accessible object that can be manipulated beyond its methods
-  exported over the accessibility API should support this interface to
-  expose all actions that it can perform.  Each action can be performed
-  or queried for a name, description or associated key bindings.  Actions
-  are needed more for ATs that assist the mobility impaired.  By providing 
+
+ Every accessible object that can be manipulated via the native GUI beyond the 
+  methods available either in the MSAA IAccessible interface or in the set of 
+  IAccessible2 interfaces (other than this IAccessibleAction interface) should 
+  support the IAccessibleAction interface in order to provide Assistive Technology
+  access to all the actions that can be performed by the object.  Each action can 
+  be performed or queried for a name, description or associated key bindings.  
+  Actions are needed more for ATs that assist the mobility impaired.  By providing 
   actions directly, the AT can present them to the user without the user having
   to perform the extra steps to navigate a context menu.
 
  The first action should be equivalent to the MSAA default action.  If there is 
- only one action, %IAccessibleAction should also be implemented.
+  only one action, %IAccessibleAction should also be implemented.
 */
 [object, uuid(B70D9F59-3B5A-4dba-AB9E-22012F607DF5)]
 interface IAccessibleAction : IUnknown

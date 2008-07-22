@@ -112,9 +112,9 @@
   be NULL and [out] longs should generally be 0, but sometimes -1 is used such
   as IAccessible2::indexInParent and IAccessibleHypertext::hyperlinkIndex.  Note 
   that for BSTR [out] variables common COM practice is that the server does the 
-  SysAllocString and the client does the SysFreeString.  When NULL is returned the 
-  client would not use SysFreeString.  Please refer to the documentation for each 
-  method for more details regarding error handling.
+  SysAllocString and the client does the SysFreeString.  Also note that when NULL
+  is returned there is no need for the client to call SysFreeString.  Please refer 
+  to the documentation for each method for more details regarding error handling.
 
  @section _memory Memory Management
   The following memory management issues should be considered:
