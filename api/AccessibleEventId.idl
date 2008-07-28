@@ -24,7 +24,11 @@
  *
  ************************************************************************/
 
-/// These constants identify the event IDs fired by IAccessible2 objects.
+/** %IAccessible2 specific event constants 
+
+ This enum defines the event IDs fired by %IAccessible2 objects.  The event IDs
+ are in addition to those used by MSAA.
+*/
 enum IA2EventID {
 
   /** The change of the number or attributes of actions of an accessible

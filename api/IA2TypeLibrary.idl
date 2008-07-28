@@ -46,14 +46,18 @@ library IAccessible2Lib
     interface IAccessibleApplication;
     interface IAccessibleComponent;
     interface IAccessibleEditableText;
-    interface IAccessibleEventId;
     interface IAccessibleHyperlink;
     interface IAccessibleHypertext;
     interface IAccessibleImage;
     interface IAccessibleRelation;
-    interface IAccessibleRole;
-    interface IAccessibleStates;
     interface IAccessibleTable;
     interface IAccessibleText;
     interface IAccessibleValue;
+	enum IA2CoordinateType;
+	enum IA2EventID;
+	enum IA2Role;
+	enum IA2ScrollType;
+	enum IA2States;
+	enum IA2TableModelChangeType;
+	enum IA2TextBoundaryType;
 }

@@ -33,13 +33,13 @@ import "IA2CommonTypes.idl";
  
  IAccessibleText::newText and IAccessibleText::oldText return this struct.
 */
-typedef struct {
+typedef struct IA2TextSegment {
   BSTR text;	///< A copy of a segment of text taken from an enclosing paragraph.
   long start;	///< Index of the first character of the segment in the enclosing text.  
   long end;		///< Index of the character following the last character of the segment in the enclosing text. 
 } IA2TextSegment;
 
-/** @brief Defines values to specify a text boundary type.
+/** This enum defines values which specify a text boundary type.
 
  IA2_TEXT_BOUNDARY_SENTENCE is optional.  When a method doesn't implement this 
  method it must return S_FALSE.  Typically this feature would not be implemented

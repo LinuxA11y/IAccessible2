@@ -50,13 +50,13 @@
   ::IA2EventID values identify events.\n
   ::IA2Role values defines roles which are in addition to the existing MSAA roles.\n
   ::IA2ScrollType values define where to place an object or substring on the screen.\n
+  ::IA2States values define states which are in addition to the existing MSAA states.\n
   ::IA2TableModelChangeType values describe the kinds of changes made to a table (insert, delete, update).\n
   ::IA2TextBoundaryType values define the requested text unit (character, word, sentence, line, paragraph).\n
   ::IA2TextSpecialOffsets values define special offsets for use in the text interfaces.
 
  @section _constants Constants
-  @ref grpRelations\n
-  @ref grpStates\n
+  @ref grpRelations
 
  @section _license Miscellaneous
   @ref _licensePage "LGPL License"\n
@@ -105,16 +105,17 @@
   <a href="http://msdn2.microsoft.com/en-us/library/bb401631.aspx">Interpreting HRESULT Values</a>
   in MSDN.
 
-  Also note that the S_FALSE return value is considered a non-error value and
-  the SUCCEEDED macro will return TRUE.  S_FALSE is used when there is no failure
+  Note that the S_FALSE return value is considered a non-error value and the 
+  SUCCEEDED macro will return TRUE.  S_FALSE is used when there is no failure
   but there was nothing valid to return, e.g. in IAccessilbe2::attributes when
   there are no attributes.  When S_FALSE is returned [out] pointer types should 
   be NULL and [out] longs should generally be 0, but sometimes -1 is used such
-  as IAccessible2::indexInParent and IAccessibleHypertext::hyperlinkIndex.  Note 
-  that for BSTR [out] variables common COM practice is that the server does the 
-  SysAllocString and the client does the SysFreeString.  Also note that when NULL
-  is returned there is no need for the client to call SysFreeString.  Please refer 
-  to the documentation for each method for more details regarding error handling.
+  as IAccessible2::indexInParent and IAccessibleHypertext::hyperlinkIndex.
+
+  Note that for BSTR [out] variables common COM practice is that the server does 
+  the SysAllocString and the client does the SysFreeString.  Also note that when
+  NULL is returned there is no need for the client to call SysFreeString.  Please
+  refer to the documentation for each method for more details regarding error handling.
 
  @section _memory Memory Management
   The following memory management issues should be considered:
@@ -281,7 +282,7 @@ import "IA2CommonTypes.idl";
  
 IAccessible2::locale returns this struct.
 */
-typedef struct {
+typedef struct IA2Locale {
   BSTR language; ///< ISO 639-1 Alpha-2 two character language code
   BSTR country;  ///< ISO 3166-1 Alpha-2 two character country code
   BSTR variant;  ///< Application specific variant of the locale
@@ -419,7 +420,11 @@ interface IAccessible2 : IAccessible
      [out, retval] long *positionInGroup 
     );
 
-  /** @brief Returns the bit strip containing any @ref grpStates "IAccessible2 states".
+  /** @brief Returns the bit strip containing any IAccessible2 states.
+  
+   The IAccessible2 states are in addition to the MSAA states and are defined in
+   the IA2States enum.
+
    @param [out] states
    @retval S_OK
   */

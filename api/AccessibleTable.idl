@@ -29,7 +29,10 @@ import "oaidl.idl";
 import "oleacc.idl";
 import "Accessible2.idl";
 
-/// Defines values which specify the kind of change made to a table
+/** These constants specify the kind of change made to a table.
+
+   This enum is used in the IA2TableModelChange struct which in turn is used by IAccessibleTable::modelChange.
+*/
 enum IA2TableModelChangeType {
   IA2_TABLE_MODEL_CHANGE_INSERT,  // = 0;
   IA2_TABLE_MODEL_CHANGE_DELETE,
@@ -44,7 +47,7 @@ enum IA2TableModelChangeType {
  column offsets define the boundaries of the subtable being removed before the
  removal.
 */
-typedef struct {
+typedef struct IA2TableModelChange {
   enum IA2TableModelChangeType type;	// insert, delete, update
   long firstRow;		///< 0 based, inclusive
   long lastRow;			///< 0 based, inclusive

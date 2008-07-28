@@ -26,12 +26,12 @@
 
 import "objidl.idl";
 
-/** Collection of roles.
+/** Collection of roles
 
   This enumerator defines an extended set of accessible roles of objects implementing
-  the IAccessible2 interface. These roles are in addition to the MSAA roles obtained
+  the %IAccessible2 interface. These roles are in addition to the MSAA roles obtained
   through the MSAA get_accRole method.  Examples are 'footnote', 'heading', and 
-  'label'. You obtain an object's IAccessible2 roles by calling IAccessible2::role.
+  'label'. You obtain an object's %IAccessible2 roles by calling IAccessible2::role.
 */
 enum IA2Role {
 
