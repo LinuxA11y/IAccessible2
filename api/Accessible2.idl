@@ -98,7 +98,8 @@
  @ref _changingInterfaces\n
  @ref _applicationInfo\n
  @ref _childIDs\n
- @ref _variants
+ @ref _variants\n
+ @ref _iaaction-iahyperlink
 
  @section _errors Error Handling
   HRESULT values are defined by the Microsoft Win32 API.  For more information, refer to 
@@ -110,7 +111,8 @@
   but there was nothing valid to return, e.g. in IAccessilbe2::attributes when
   there are no attributes.  When S_FALSE is returned [out] pointer types should 
   be NULL and [out] longs should generally be 0, but sometimes -1 is used such
-  as IAccessible2::indexInParent and IAccessibleHypertext::hyperlinkIndex.
+  as IAccessible2::indexInParent, IAccessibleText::caretOffset, and
+  IAccessibleHypertext::hyperlinkIndex.
 
   Note that for BSTR [out] variables common COM practice is that the server does 
   the SysAllocString and the client does the SysFreeString.  Also note that when
@@ -269,6 +271,14 @@
   specified, i.e. VT_I4, VT_IDISPATCH, etc.  The methods that return VARIANTs are 
   IAccessibleHyperlink::anchor, IAccessibleHyperlink::anchorTarget, IAccessibleValue::currentValue,
   IAccessibleValue::maximumValue, IAccessibleValue::minimumValue.
+
+ @section _iaaction-iahyperlink IAccessibleHyperlink as subclass of IAccessibleAction
+  In this version of the IDL, IAccessibleHyperlink is a subclass of IAccessibleAction.  
+  However, there is no practical need for that inheritance and in some cases, such as
+  an image map of smart tags, it doesn't make sense because such an image map doesn't 
+  have actionable objects; it's the secondary smart tags that are actionable.  As a 
+  result, implementations should not rely on the inheritance as it may be removed in 
+  a later version of the IDL.
 **/
 
 import "objidl.idl";

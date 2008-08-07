@@ -48,13 +48,24 @@ import "AccessibleAction.idl";
  This interface provides access to a single object which can have multiple actions.
   An example is an image map which is an image with multiple links each of which is
   associated with a separate non-overlapping area of the image.  This interface could
-  also be applied to other kinds of objects with multiple actions.
+  also be applied to other kinds of objects with multiple actions such as "smart tags"
+  which are objects, typically strings, which have multiple actions such as
+  "Activate URI", "Bookmark URI", etc.
 
- An interesting use case to consider is an image map where each area of the image
-  is associated with multiple actions such as "Activate URI", "Bookmark URI", etc.
-  The typical UI implementation for this is to provide a means to activate a menu
-  listing multiple actions.  In this case the action associated with an area is to
-  activate a menu rather than activating a link as in the typical image map case.
+ An interesting use case is an image map where each area is associated with multiple
+  actions, e.g. an image map of smart tags.  In this case you would have to implement
+  two levels of accessible hyperlinks.  The first level hyperlinks would only implement
+  anchor and anchorTarget.  The anchors would all reference the image object.  The
+  anchorTargets would reference the second level accessible hyperlink objects.  None
+  of the IAccessibleAction methods would be implemented on the first level hyperlink
+  objects.  The second level hyperlink objects would implement the IAccessibleAction
+  methods.  Their anchors would also reference the image object and their anchorTargets
+  would reference URLs or the objects that would be activated.
+
+ This use case demonstrates that in some cases there is no need for IAccessibleHyperlink
+  to derive from IAccessibleAction.  As a result it may be removed in a later version of
+  the IDL and it is suggested that implementations should not rely on the inheritance.
+
 */
 [object, uuid(01C20F2B-3DD2-400f-949F-AD00BDAB1D41)]
 interface IAccessibleHyperlink : IAccessibleAction

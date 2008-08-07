@@ -37,9 +37,10 @@ import "oleacc.idl";
   support the IAccessibleAction interface in order to provide Assistive Technology
   access to all the actions that can be performed by the object.  Each action can 
   be performed or queried for a name, description or associated key bindings.  
-  Actions are needed more for ATs that assist the mobility impaired.  By providing 
-  actions directly, the AT can present them to the user without the user having
-  to perform the extra steps to navigate a context menu.
+  Actions are needed more for ATs that assist the mobility impaired, such as
+  on-screen keyboards and voice command software.  By providing actions directly,
+  the AT can present them to the user without the user having to perform the extra
+  steps to navigate a context menu.
 
  The first action should be equivalent to the MSAA default action.  If there is 
   only one action, %IAccessibleAction should also be implemented.

@@ -149,4 +149,4 @@ IA2_STATE_TRANSIENT =				0x10000,
 /** Indicates the orientation of this object is vertical. */
 IA2_STATE_VERTICAL =				0x20000
 
-}
+};
