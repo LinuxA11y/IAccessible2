@@ -60,4 +60,5 @@ library IAccessible2Lib
 	enum IA2States;
 	enum IA2TableModelChangeType;
 	enum IA2TextBoundaryType;
+	enum IA2TextSpecialOffsets;
 }

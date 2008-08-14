@@ -108,7 +108,7 @@
 
   Note that the S_FALSE return value is considered a non-error value and the 
   SUCCEEDED macro will return TRUE.  S_FALSE is used when there is no failure
-  but there was nothing valid to return, e.g. in IAccessilbe2::attributes when
+  but there was nothing valid to return, e.g. in IAccessible2::attributes when
   there are no attributes.  When S_FALSE is returned [out] pointer types should 
   be NULL and [out] longs should generally be 0, but sometimes -1 is used such
   as IAccessible2::indexInParent, IAccessibleText::caretOffset, and
