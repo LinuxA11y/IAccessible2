@@ -1,4 +1,4 @@
-2008-August-07 Pete Brunet <brunet@us.ibm.com>
+2008-September-18 Pete Brunet <brunet@us.ibm.com>
 
 	* General comments
 	Added a comment to the following methods that the max size [in] parameter is not used.
@@ -64,6 +64,7 @@
 
 	* api\AccessibleEvent.idl
 	Added constant  IA2_EVENT_ACTIVE_DESCENDANT_CHANGED = IA2_EVENT_ACTIVE_DECENDENT_CHANGED
+	Noted that the managed descendant scheme is not implementable with the current WinEvents mechanism.
 	Added comments:
 	  IA2_EVENT_TEXT_SELECTION_CHANGED:
 	    Later versions of Microsoft dev environments have equivalent EVENT_OBJECT_TEXTSELECTIONCHANGED.
@@ -79,6 +80,7 @@
 
 	*api\AccessibleRelation.idl
 	targets method: renamed out parameter from target to targets
+	added constant with double L spelling for labelled by
 
 	* api\AccessibleStates.idl
 	Added comments:
@@ -91,7 +93,10 @@
 	    Used when the parent has state IA2_STATE_MANAGES_DESCENDANTS.
 	  IA2_STATE_ARMED:
 	     The condition a widget is in between when the mouse button is pressed but not yet rlelased.
-	Changed states from being constants to an enum; this helps those creating a typelib
+	Removed nonsense comments from A2_STATE_MANAGES_DESCENDANTS.
+	Changed states from being constants to an enum; this helps those creating a typelib.
+	Noted that the managed descendant scheme is not implementable with the current WinEvents mechanism.
+	  This scheme uses IA2_STATE_MANAGES_DESCENDANTS, IA2_STATE_ACTIVE, and IA2_STATE_TRANSIENT.
 
 	* api\AccessibleTable.idl
 	Added comments:
@@ -111,8 +116,9 @@
 	  
 	* api\AccessibleText.idl
 	Fixed comments:
-	  textAtOffset: removed nonsense sentence
-	  textAfterOffset: changed a word, "decreased" to "increased"
+	  textAtOffset: removed nonsense sentences
+	  textAfterOffset: changed words, "decreased" to "increased", "before" to "after"
+	  textAt/After/BeforeOffset: NULL, not "", is returned if there is nothing valid to return
 	  attributes: improved description of start/endOffset
 	Added comments:
 	  For all methods that take a start and end offset, E_FAIL is returned when:
@@ -124,10 +130,12 @@
 	  caretOffset, setCaretOffset: reworded to use logical order rather than left to right order
 	  IA2_TEXT_BOUNDARY_CHAR: added discussion of multichar fields, e.g. date
 	  caretOffset returns -1 if the caret is active on some other object
-	Added name to IA2TextSegment struct to help with creating a typelib
+	Added name to IA2TextSegment struct to help with creating a typelib.
+	Added E_FAIL to setCaretOffset
 
 	*api\AccessibleValue.idl
 	Added reference to General Information section on VARIANTs.
+	minimumValue: changed text from "upper" to "lower" bound.
 
 	* api\IA2CommonTypes.idl
 	Enhanced commentary for IA2_SCROLL_* enums

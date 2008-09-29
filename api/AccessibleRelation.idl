@@ -64,8 +64,14 @@ const WCHAR *const IA2_RELATION_FLOWS_TO = L"flowsTo";
 /** This object is label for a target object. */
 const WCHAR *const IA2_RELATION_LABEL_FOR = L"labelFor";
 
-/** This object is labelled by a target object. */
+/** This object is labelled by a target object. Note that the double L spelling
+ which follows is preferred.  Please use it instead.  This single L version may
+ be removed in a later version.
+*/
 const WCHAR *const IA2_RELATION_LABELED_BY = L"labelledBy";
+
+/** This object is labelled by a target object. */
+const WCHAR *const IA2_RELATION_LABELLED_BY = L"labelledBy";
 
 /** This object is a member of a group of one or more objects. When 
  there is more than one object in the group each member may have one and the 

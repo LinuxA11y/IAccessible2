@@ -95,7 +95,7 @@ interface IAccessibleValue : IUnknown
    
    @param [out] minimumValue
     Returns the minimal value in an implementation dependent type. If this object 
-    has no upper bound then an empty object is returned.  See the section about 
+    has no lower bound then an empty object is returned.  See the section about 
 	@ref _variants "VARIANTs" for additional information.
    @retval S_OK
   */

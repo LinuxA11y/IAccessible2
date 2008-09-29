@@ -301,8 +301,8 @@ interface IAccessibleText : IUnknown
    For example, if text type is ::IA2_TEXT_BOUNDARY_WORD, then the complete 
     word that is closest to and located before offset is returned.
 
-   If the index is valid, but no suitable word (or other boundary type) is found, an 
-    empty text segment is returned.
+   If the index is valid, but no suitable word (or other boundary type) is found, a
+    NULL pointer is returned.
 
    @param [in] offset
     Index of the character for which to return the text part before it.  The index 
@@ -340,10 +340,10 @@ interface IAccessibleText : IUnknown
     index value.
 
    For example, if text type is ::IA2_TEXT_BOUNDARY_WORD, then the complete 
-    word that is closest to and located before offset is returned.
+    word that is closest to and located after offset is returned.
 
-   If the index is valid, but no suitable word (or other text type) is found, an 
-    empty text segment is returned.
+   If the index is valid, but no suitable word (or other text type) is found, a 
+    NULL pointer is returned.
 
    @param [in] offset
     Index of the character for which to return the text part before it.  The index 
@@ -377,11 +377,8 @@ interface IAccessibleText : IUnknown
     
    Returns the substring of the specified text type at the specified offset.
 
-   For example, if text type is ::IA2_TEXT_BOUNDARY_WORD, then the complete 
-    word that is closest to and located before offset is returned.
-
-   If the index is valid, but no suitable word (or other text type) is found, an 
-    empty text segment is returned.
+   If the index is valid, but no suitable word (or other text type) is found, a 
+    NULL pointer is returned.
 
    @param [in] offset
     Index of the character for which to return the text part before it.  The index 
@@ -440,6 +437,7 @@ interface IAccessibleText : IUnknown
     insertion goes before the first character.  An index of IAccessibleText::nCharacters 
 	leads to insertion after the last character.
    @retval S_OK
+   @retval E_FAIL if the caret cannot be set
    @retval E_INVALIDARG if bad [in] passed
   */
   HRESULT setCaretOffset

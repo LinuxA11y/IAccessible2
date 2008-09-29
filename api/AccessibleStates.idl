@@ -43,7 +43,9 @@ enum IA2States {
   the item that will get focus if you tab to the container.
 
  This information is important for knowing what to report for trees and potentially 
-  other containers in a virtual buffer. 
+  other containers in a virtual buffer.
+
+ Also, see ::IA2_STATE_MANAGES_DESCENDANTS for more information.
 */
 IA2_STATE_ACTIVE =					0x1,
 
@@ -77,13 +79,13 @@ IA2_STATE_INVALID_ENTRY =			0x40,
 
 /** Indicates that this object manages its children.
 
- Used when children are transient.  In this case it is not necessary to add
-  listeners to the children.
-
- The state is added to improve performance in the case of large containers such 
-  as tables. When an object manages its children it is not necessary to iterate 
-  over all the children and add listeners.  The parent object will provide state 
-  notifications regarding the state of its children.
+ Note: Due to the fact that MSAA's WinEvents don't allow the active child index
+  to be passed on the IA2_EVENT_ACTIVE_DESCENDANT_CHANGED event, the manages
+  descendants	scheme can't be used.  Instead the active child object has to fire
+  MSAA's EVENT_OBJECT_FOCUS.  In a future release a new event mechanism may be
+  added to provide for event specific data to be passed with the event.  At that
+  time the IA2_EVENT_ACTIVE_DECENDENT_CHANGED event and
+  IA2_STATE_MANAGES_DESCENDANTS state would be useful.
 */
 IA2_STATE_MANAGES_DESCENDANTS =		0x80,
 
@@ -143,6 +145,8 @@ IA2_STATE_SUPPORTS_AUTOCOMPLETION =	0x8000,
  result it is likely that this state is not of use to an assistive technology, but it 
  is provided in case an assistive technology determines that knowledge of the transient 
  nature of the object is useful and also for harmony with the Linux accessibility API.
+
+ Also, see ::IA2_STATE_MANAGES_DESCENDANTS for more information.
  */
 IA2_STATE_TRANSIENT =				0x10000,
 
