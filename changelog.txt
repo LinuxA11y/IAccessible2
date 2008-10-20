@@ -1,4 +1,4 @@
-2008-September-18 Pete Brunet <brunet@us.ibm.com>
+2008-October-13 Pete Brunet <brunet@us.ibm.com>
 
 	* General comments
 	Added a comment to the following methods that the max size [in] parameter is not used.
@@ -77,6 +77,7 @@
 	*api\AccessibleHyperlink.idl
 	Added reference to General Information section on VARIANTs.
 	Clarified case where objects have more than one action.
+	valid method is deprecated
 
 	*api\AccessibleRelation.idl
 	targets method: renamed out parameter from target to targets

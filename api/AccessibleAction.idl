@@ -93,12 +93,20 @@ interface IAccessibleAction : IUnknown
      [out, retval] BSTR *description
     );
 
-  /** @brief Returns an array of BSTRs describing one or more key bindings, if there
-   are any, associated with the specified action.
+  /** @brief Returns an array of BSTRs describing one or more key bindings, if
+   there are any, associated with the specified action.
 
-   The returned strings are the human readable key sequences to be used for each 
-   action, e.g. ctrl+shift+D.  An AT such as an On Screen Keyboard might not expose 
-   these bindings but provide alternative means of activation.
+   The returned strings are the localized human readable key sequences to be
+   used to activate each action, e.g. "Ctrl+Shift+D".  Since these key
+   sequences are to be used when the object has focus, they are like
+   mnemonics (access keys), and not like shortcut (accelerator) keys.
+
+   There is no need to implement this method for single action controls since
+   that would be redundant with the standard MSAA programming practice of
+   getting the mnemonic from get_accKeyboardShortcut.
+
+   An AT such as an On Screen Keyboard might not expose these bindings but
+   provide alternative means of activation.
 
    Note: the client allocates and passes in an array of pointers.  The server
    allocates the BSTRs and passes back one or more pointers to these BSTRs into

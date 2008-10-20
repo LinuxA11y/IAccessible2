@@ -144,6 +144,12 @@ interface IAccessibleHyperlink : IAccessibleAction
    This is a volatile state that may change without sending an appropriate event.
    Returns TRUE if the referenced target is still valid and FALSE otherwise.
 
+   This has also been used to indicate whether or not the URI of the anchorTarget
+   is malformed.
+
+   Note: This method is not being used, is deprecated, and should not be implemented or
+   used.  It is likely that this method will be removed in a later version of the IDL.
+
    @param [out] valid
    @retval S_OK
    @retval S_FALSE if there is nothing to return, [out] value is FALSE 
