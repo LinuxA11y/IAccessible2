@@ -1,158 +1,39 @@
-2008-October-13 Pete Brunet <brunet@us.ibm.com>
+2009-August-25 Pete Brunet <pete@a11ysoft.com>
 
-	* General comments
-	Added a comment to the following methods that the max size [in] parameter is not used.
-	Also clarified documentation of the other parameters.
-	  IA2::relations, extendedStates, localizedExtendedStates
-	  IAAction::keyBinding
-	  IARelation::targets
-	  IATable::selectedChildren, selectedColumns, selectedRows
-	Occasional rewording of comments for readability.
-	Added Linux Foundation to the list of copyrights (used years 2007, 2008)
-	Corrected year on IBM copyright from 2007 to 2006 (it was donated in 2006)
-	Updated address of the Free Software Foundation in the LGPL license
-	Added return values for all methods, e.g. S_OK, S_FALSE, E_INVALIDARG
+	Changes from 1.0.2 to 1.1
+
+	* doxygen.conf
+	Changed version from 1.0.2 to 1.1
 
 	* api\Accessible2.idl
-	Added a General Information section, referenced from the first page, including sections for
-	  Error Handling, Memory Management, Zero and One Based Indexes, Enums,
-	  Special Offsets for use in the IAccessibleText and IAccessibleEditableText Methods,
-	  Discovery of Interfaces, Changing between Accessible Interfaces, Access to Information 
-	  about the Application, Child IDs, VARIANTs, IAccessibleHyperlink as subclass of IAccessibleAction
-	Added additional text and clarification to the Memory Management section including the
-	  Special Considerations when using Arrays subsection.
-	Updated the LGPL link so it points at LGPL 2.1 instead of 3.0
-	relations method: renamed out parameter from relation to relations
-	Removed comment from scrollToPoint method:
-	  S_FALSE is returned if the object is already at the specified location.
-	Additional comments:
-	  indexInParent:  -1 is returned if the child is invalid, IA::accChildCount is the upper bound
-	  groupPosition:
-	    all indexes are 1 based, 0 means NA
-	    not normally implemented on a combo box; only implemented if list is not a child
-	  role: 
-	    [proget] is missing, c++ name won't have get_ prefix
-	    don't pass IA2 roles through MSAA's get_accRole
-	    pass closest MSAA role or ROLE_SYSTEM_CLIENT (if no good match) through get_accRole.
-	  states:  add link to the IAccessible2 state constants
-	  uniqueID:  update description after being reviewed
-	  IA2Locale struct:  it's returned by IA2::locale
-	  IAApplication should be accessible via QueryService from any object implementing IAccessible2.
-	Added name to IA2Locale struct to help with creating a typelib
-	Fixed markup due to IA2States changing from constants to an enum
+	Genaral Information Section:  
+	- Added trademark attribution section
+	- Added comment: must QI between IA2 interfaces but QS to IAApplication
 
-	* api\AccessibleAction
-	Clarified the interface description.
-	Added comments: 
-	  nActions: [proget] is missing, c++ name won't have get_ prefix
-	  The first action is equivalent to the MSAA default action.  If there is only one, also implement IAccessibleAction.	
-	  keyBinding: key sequence in human readable form, e.g. ctrl+shift+D	keyBinding method: 
-	  renamed out parameter to plural, i.e. nMaxBindings, nBindings, keyBindings
-
-	* api\AccessibleApplication
-	Added comment:  
-	  IAApplication should be accessible via QueryService from any object implementing IAccessible2.
-
-	* api\AccessibleComponent.idl
-	Added comment:  defined IAColor as ARGB
-	  
-	* api\AccessibleEditableText.idl
-	Added import "IA2CommonTypes.idl" to pick up special offset constant
-	Added comments:
-	  Even read only widgets should implement this
-	  Referenced General Information section describing the special offset constant
-
-	* api\AccessibleEvent.idl
-	Added constant  IA2_EVENT_ACTIVE_DESCENDANT_CHANGED = IA2_EVENT_ACTIVE_DECENDENT_CHANGED
-	Noted that the managed descendant scheme is not implementable with the current WinEvents mechanism.
-	Added comments:
-	  IA2_EVENT_TEXT_SELECTION_CHANGED:
-	    Later versions of Microsoft dev environments have equivalent EVENT_OBJECT_TEXTSELECTIONCHANGED.
-	    Servers should use it if available; clients should respond to both.
-	  IA2_EVENT_TEXT_CHANGED:
-	    Deprecated; equivalent to IA2_EVENT_TEXT_UPDATED.
-	  IA2_EVENT_TEXT_UPDATED:
-	    Alternatively can use IA2_EVENT_TEXT_REMOVED/INSERTED (for compatibility with ATK/AT-SPI).
-
-	*api\AccessibleHyperlink.idl
-	Added reference to General Information section on VARIANTs.
-	Clarified case where objects have more than one action.
-	valid method is deprecated
-
-	*api\AccessibleRelation.idl
-	targets method: renamed out parameter from target to targets
-	added constant with double L spelling for labelled by
-
-	* api\AccessibleStates.idl
-	Added comments:
-	  IA2_STATE_ACTIVE: 
-	    Can indicate an active object in a containing object, even when it doesn't currently have focus.
-	    It's the object that gets focus when the containing object gets focus
-	  IA2_STATE_STALE:
-	    This can also happen when an object's indexInParent changes
-	  IA2_STATE_TRANSIENT:
-	    Used when the parent has state IA2_STATE_MANAGES_DESCENDANTS.
-	  IA2_STATE_ARMED:
-	     The condition a widget is in between when the mouse button is pressed but not yet rlelased.
-	Removed nonsense comments from A2_STATE_MANAGES_DESCENDANTS.
-	Changed states from being constants to an enum; this helps those creating a typelib.
-	Noted that the managed descendant scheme is not implementable with the current WinEvents mechanism.
-	  This scheme uses IA2_STATE_MANAGES_DESCENDANTS, IA2_STATE_ACTIVE, and IA2_STATE_TRANSIENT.
-
-	* api\AccessibleTable.idl
-	Added comments:
-	  General documentation cleanup
-	  Cells don't have to be direct children.  If they aren't don't use IA2::indexInParent.
-	    Instead use "table-cell-index" object attribute.  Change file wide commentary to use the 
-	    term "cell" instead of "child"
-	  The indexes are 0 based.
-	  modelChange:  Specify ramifications of using data outside of an event thread.
-	  IATableModelChange:
-	    struct rows and columns are 0 based and inclusive
-	    The row and column offsets define the boundaries of the subtable that was removed
-	  Rename parameters on the following methods:
-	    childIndex, rowIndex, columnIndex: rename the childIndex parameter to cellIndex
-	    nSelectedChildren: rename childCount to cellCount
-	Added name to IA2TableModelChange struct to help with creating a typelib
-	  
 	* api\AccessibleText.idl
-	Fixed comments:
-	  textAtOffset: removed nonsense sentences
-	  textAfterOffset: changed words, "decreased" to "increased", "before" to "after"
-	  textAt/After/BeforeOffset: NULL, not "", is returned if there is nothing valid to return
-	  attributes: improved description of start/endOffset
-	Added comments:
-	  For all methods that take a start and end offset, E_FAIL is returned when:
-	     endOffset < startOffset or endoffset > length
-	  old/newText:  Specify ramifications of using data outside of an event thread.
-	  IA2TextSegment struct:  it's returned by IAText::oldText and IAText::newText
-	  IA2TextBoundaryType enum:  support for sentence is optional
-	  Referenced General Information section describing the special offset constants
-	  caretOffset, setCaretOffset: reworded to use logical order rather than left to right order
-	  IA2_TEXT_BOUNDARY_CHAR: added discussion of multichar fields, e.g. date
-	  caretOffset returns -1 if the caret is active on some other object
-	Added name to IA2TextSegment struct to help with creating a typelib.
-	Added E_FAIL to setCaretOffset
+	- caretOffset:  Describe behavior for hierarchical text objects.
+	- changed the description of IA2_TEXT_BOUNDARY_WORD
+	- IAText::attributes: added link to the text attributes spec on the LF site.
 
-	*api\AccessibleValue.idl
-	Added reference to General Information section on VARIANTs.
-	minimumValue: changed text from "upper" to "lower" bound.
+	* api\AccessibleTable2.idl
+	New interface, primarily to use an accessible to access information rather
+	than row/column indexes.
+
+	* api\AccessibleTableCell.idl
+	New interface for table cells; methods were moved out of IAccessibleTable.
 
 	* api\IA2CommonTypes.idl
-	Enhanced commentary for IA2_SCROLL_* enums
-	Added enum for IA2TextSpecialOffsets
-	  IA2_TEXT_OFFSET_LENGTH = -1 (equal to length)
-	  IA2_TEXT_OFFSET_CARET = -2 (text is associated with line containing caret)
-	Added enum for scroll type
-	  IA2_SCROLL_TYPE_ANYWHERE - place object/substring within view
-	Updated comment on edge scroll types to specify that as much as possible of the edge 
-	  must be brought into view
+	Added enum and struct common to IAccessibleTable and IAccessibleTable2
+
+	* api\AccessibleTable.idl
+	Moved enum and struct to IA2CommonTypes.idl
+
+	* api\AccessibleRelation.idl
+	Documentation changes:
+	- IARelation::relationType: added link to the list of relations
+	- IA2_RELATION_FLOWS_FROM: useful for connecting text and non-text object
+	  in the intended reading order.
 
 	* api\IA2TypeLibrary.idl
-	Added an empty line at the end, as requested by a CVS user
-	Removed some nonexistent interfaces
-	Added 7 enums
-
-	* IDL-Test\IA2 IDL Test.vcproj:  New Visual C++ 2008 Express file for testing
-	* IDL-Test\IA2 IDL Test.sln:  New Visual C++ 2008 Express file for testing
-	* IDL-Test\IA2 Merged IDL Test.vcproj:  New Visual C++ 2008 Express file for testing
+	- Changed vefrsion from 1.0 to 1.1
+	- Changed GUID

@@ -35,7 +35,7 @@ import "AccessibleHyperlink.idl";
  The %IAccessibleHypertext interface is the main interface to expose
   hyperlinks in a document, typically a text document, that are used 
   to reference other documents.  A typical implementation is to implement 
-  this interface the smallest text object such as a paragraph of text.
+  this interface on the smallest text object such as a paragraph of text.
 */
 [object, uuid(6B4F8BBF-F1F2-418a-B35E-A195BC4103B9)]
 interface IAccessibleHypertext : IAccessibleText

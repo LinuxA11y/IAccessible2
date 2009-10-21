@@ -4,7 +4,7 @@
  *
  *  IAccessible2 IDL Specification
  *
- *  Copyright (c) Linux Foundation 2007, 2008
+ *  Copyright (c) Linux Foundation 2007, 2009
  *  Copyright (c) IBM Corp. 2006
  *  Copyright (c) Sun Microsystems, Inc. 2000, 2006
  *
@@ -35,7 +35,9 @@
   IAccessibleHyperlink\n
   IAccessibleImage\n
   IAccessibleRelation\n
-  IAccessibleTable\n
+  IAccessibleTable [deprecated]\n
+  IAccessibleTable2\n
+  IAccessibleTableCell\n
   IAccessibleText\n
   IAccessibleEditableText\n
   IAccessibleValue
@@ -58,7 +60,7 @@
  @section _constants Constants
   @ref grpRelations
 
- @section _license Miscellaneous
+ @section _misc Miscellaneous
   @ref _licensePage "LGPL License"\n
   @ref _generalInfo "General Information"\n
 
@@ -99,12 +101,13 @@
  @ref _applicationInfo\n
  @ref _childIDs\n
  @ref _variants\n
- @ref _iaaction-iahyperlink
+ @ref _iaaction-iahyperlink\n
+ @ref _trademark
 
  @section _errors Error Handling
-  HRESULT values are defined by the Microsoft Win32 API.  For more information, refer to 
+  HRESULT values are defined by the Microsoft&reg; Win32&reg; API.  For more information, refer to 
   <a href="http://msdn2.microsoft.com/en-us/library/bb401631.aspx">Interpreting HRESULT Values</a>
-  in MSDN.
+  in MSDN&reg;.
 
   Note that the S_FALSE return value is considered a non-error value and the 
   SUCCEEDED macro will return TRUE.  S_FALSE is used when there is no failure
@@ -178,11 +181,11 @@
 
  @section _dicoveringInterfaces Discovery of Interfaces
   In general AT (Assistive Technology) should try IAccessible2 interfaces, followed by using 
-  the MSAA interfaces.  (In cases where the an application is known to have custom interfaces 
-  which provide information not supplied by IAccessible2 or MSAA, then those custom interfaces 
-  can be used.)  The AT can then, by default, support unknown IAccessible2/MSAA applications, 
-  without the application developers having to request AT vendors for support on an individual 
-  application by application basis.
+  the MSAA (Microsoft&reg; Active Accessibility&reg;) interfaces.  (In cases where the an application
+  is known to have custom interfaces which provide information not supplied by IAccessible2
+  or MSAA, then those custom interfaces can be used.)  The AT can then, by default, support
+  unknown IAccessible2/MSAA applications, without the application developers having to request
+  AT vendors for support on an individual application by application basis.
 
   When you have a reference to an IAccessible and require a reference to an IAccessible2 use 
   QueryService as follows:
@@ -228,7 +231,7 @@
    easily implement the interface on the same object or a separate object. The latter is 
    often hard to do with QueryInterface unless the original object supports aggregation. 
 
-  Two related references in MSDN are: 
+  Two related references in MSDN&reg; are: 
   @li <a href="http://msdn.microsoft.com/en-us/library/ms696078(VS.85).aspx">
   "Using QueryService to expose a native object model interface for an IAccessible object"</a>
   @li <a href="http://msdn.microsoft.com/en-us/library/ms528415.aspx#acc_obj"> 
@@ -237,16 +240,13 @@
   Based on this information from Microsoft, QueryService must be used to switch back and forth 
   between a reference to an MSAA IAccessible interface and any of the IAccessible2 interfaces. 
 
-  Regarding switching between any of the IAccessible2 interfaces, ATs typically use QueryInterface.  
-  This is because it is typical for applications implementing IAccessible2 to implement all 
-  IAccessible2 interfaces on a single object.  However it is possible that an application could 
-  use more than one object to implement the full set of IAccessible2 interfaces and as a result 
-  QueryService would have to be used.  If your AT is using the IAccessible2 interfaces and you want 
-  to allow for access to the widest range of existing and future applications you should use 
-  QueryService rather than QueryInterface.  If the interface being switched to is implemented on 
-  the same object there shouldn't be a noticeable difference in performance and if the interface is 
-  implemented on another object the application can transfer the request to the secondary object 
-  saving exception handling code in the AT. 
+  Regarding switching between any of the IAccessible2 interfaces, applications implementing
+  IAccessible2 should implement the IAccessible2 interfaces on a single object since ATs
+  will be using QueryInterface to switch between the IAccessilbe2 interfaces.  Implementing
+  the IAccessible2 interfaces on separate objects would require the use of QueryService.
+  There is one exception, IAccessibleApplication can be implemented on a separate object so
+  its common code doesn't have to be included in each accessible object.  ATs should use
+  QueryService to access IAccessibleApplication.
 
  @section _applicationInfo Access to Information about the Application
   Servers implementing IAccessible2 should provide access to the IAccessibleApplication 
@@ -279,6 +279,12 @@
   have actionable objects; it's the secondary smart tags that are actionable.  As a 
   result, implementations should not rely on the inheritance as it may be removed in 
   a later version of the IDL.
+
+ @section _trademark Trademark Attribution
+  The names of actual companies and products mentioned herein may be the trademarks of
+  their respective owners.  In particular, Active Accessibility, Microsoft, MSDN, and Win32
+  are trademarks of the Microsoft group of companies in the U.S.A. and/or other countries.
+
 **/
 
 import "objidl.idl";
@@ -522,9 +528,11 @@ interface IAccessible2 : IAccessible
    current window, and remains the same for the lifetime of the accessible
    object. 
    
-   The uniqueID is not related to the MSAA objectID which is used by the server 
-   to disambiguate between IAccessibles per HWND or the MSAA childID which is 
-   used to disambiguate between children being managed by an IAccessible.
+   The uniqueID is not related to:
+   - the MSAA objectID which is used by the server to disambiguate between
+   IAccessibles per HWND or
+   - the MSAA childID which is used to disambiguate between children being
+   managed by an IAccessible.
 
    This value is provided so the AT can have access to a unique runtime persistent 
    identifier even when not handling an event for the object.
@@ -535,7 +543,7 @@ interface IAccessible2 : IAccessible
    Thus, if there's a REORDER/SHOW/HIDE event the AT knows which part of the 
    internal structure has been invalidated and can refetch just that part.
 
-   This value can also be used by and AT to determine when the current control
+   This value can also be used by an AT to determine when the current control
    has changed. If the role is the same for two controls that are adjacent in 
    the tab order, this can be used to detect the new control.
 

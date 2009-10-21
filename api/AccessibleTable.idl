@@ -4,7 +4,7 @@
  *
  *  IAccessible2 IDL Specification
  *
- *  Copyright (c) Linux Foundation 2007, 2008
+ *  Copyright (c) Linux Foundation 2007, 2009
  *  Copyright (c) IBM Corp. 2006
  *  Copyright (c) Sun Microsystems, Inc. 2000, 2006
  *
@@ -28,32 +28,7 @@ import "objidl.idl";
 import "oaidl.idl";
 import "oleacc.idl";
 import "Accessible2.idl";
-
-/** These constants specify the kind of change made to a table.
-
-   This enum is used in the IA2TableModelChange struct which in turn is used by IAccessibleTable::modelChange.
-*/
-enum IA2TableModelChangeType {
-  IA2_TABLE_MODEL_CHANGE_INSERT,  // = 0;
-  IA2_TABLE_MODEL_CHANGE_DELETE,
-  IA2_TABLE_MODEL_CHANGE_UPDATE
-};
-
-/** A structure defining the type of and extents of changes made to a table
- 
- IAccessibleTable::modelChange returns this struct.  In the case of an insertion
- or change the row and column offsets define the boundaries of the inserted or 
- changed subtable after the operation.  In the case of a deletion the row and 
- column offsets define the boundaries of the subtable being removed before the
- removal.
-*/
-typedef struct IA2TableModelChange {
-  enum IA2TableModelChangeType type;	// insert, delete, update
-  long firstRow;		///< 0 based, inclusive
-  long lastRow;			///< 0 based, inclusive
-  long firstColumn;		///< 0 based, inclusive
-  long lastColumn;		///< 0 based, inclusive
-} IA2TableModelChange;
+import "IA2CommonTypes.idl";
 
 /** @brief This interface gives access to a two-dimensional table. 
        
@@ -76,6 +51,9 @@ typedef struct IA2TableModelChange {
   However, that range includes at least the intervals from the from the first row 
   or column with the index 0 up to the last (but not including) used row or column 
   as returned by IAccessibleTable::nRows and IAccessibleTable::nColumns.
+
+ Note that newer implementations are now using IAccessibleTable2 and IAccessibleTableCell
+  rather than this interface.
 */
 [object, uuid(35AD8070-C20C-4fb4-B094-F4F7275DD469)]
 interface IAccessibleTable : IUnknown

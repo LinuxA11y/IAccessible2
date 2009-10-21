@@ -4,7 +4,7 @@
  *
  *  IAccessible2 IDL Specification
  *
- *  Copyright (c) Linux Foundation 2007, 2008
+ *  Copyright (c) Linux Foundation 2007, 2009
  *  Copyright (c) IBM Corp. 2006
  *  Copyright (c) Sun Microsystems, Inc. 2000, 2006
  *
@@ -135,3 +135,30 @@ enum IA2TextSpecialOffsets {
   IA2_TEXT_OFFSET_CARET = -2	/**< This offset signifies that the text related to the physical location
 								 of the caret should be used. */
 };
+
+/** These constants specify the kind of change made to a table.
+
+   This enum is used in the IA2TableModelChange struct which in turn is used by
+   IAccessibleTable::modelChange and IAccessibleTable2::modelChange.
+*/
+enum IA2TableModelChangeType {
+  IA2_TABLE_MODEL_CHANGE_INSERT,  // = 0;
+  IA2_TABLE_MODEL_CHANGE_DELETE,
+  IA2_TABLE_MODEL_CHANGE_UPDATE
+};
+
+/** A structure defining the type of and extents of changes made to a table
+ 
+ IAccessibleTable::modelChange and IAccessibleTable2::modelChange return this struct.
+ In the case of an insertion or change the row and column offsets define the boundaries
+ of the inserted or changed subtable after the operation.  In the case of a deletion
+ the row and column offsets define the boundaries of the subtable being removed before
+ the removal.
+*/
+typedef struct IA2TableModelChange {
+  enum IA2TableModelChangeType type;	// insert, delete, update
+  long firstRow;		///< 0 based, inclusive
+  long lastRow;			///< 0 based, inclusive
+  long firstColumn;		///< 0 based, inclusive
+  long lastColumn;		///< 0 based, inclusive
+} IA2TableModelChange;

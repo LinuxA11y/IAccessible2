@@ -4,7 +4,7 @@
  *
  *  IAccessible2 IDL Specification
  *
- *  Copyright (c) Linux Foundation 2007, 2008
+ *  Copyright (c) Linux Foundation 2007, 2009
  *  Copyright (c) IBM Corp. 2006
  *  Copyright (c) Sun Microsystems, Inc. 2000, 2006
  *
@@ -55,7 +55,11 @@ const WCHAR *const IA2_RELATION_EMBEDDED_BY = L"embeddedBy";
 */
 const WCHAR *const IA2_RELATION_EMBEDS = L"embeds";
 
-/** Content flows to this object from a target object. */
+/** Content flows to this object from a target object. 
+ This relation and IA2_RELATION_FLOWS_TO are useful to tie text and non-text
+ objects together in order to allow assistive technology to follow the
+ intended reading order.
+*/
 const WCHAR *const IA2_RELATION_FLOWS_FROM = L"flowsFrom";
 
 /** Content flows from this object to a target object. */
@@ -102,6 +106,7 @@ interface IAccessibleRelation : IUnknown
 {
   /** @brief Returns the type of the relation.
    @param [out] relationType
+    The strings returned are defined @ref grpRelations "in this section of the documentation".
    @retval S_OK
   */
   [propget] HRESULT relationType

@@ -1,11 +1,13 @@
 How to build the IA2 docs, a merged IDL file, a zip file containing the docs and IDL files.
 - The directory tree...
   - ia2 contains:
+    - this file
     - buildapi.sh: the build script (need cygwin bash shell interpreter installed)
     - doxygen.conf: the doxygen config file (tweaked from the doxygen distribution)
     - doxygen.css: the doxygen css file (tweaked from the doxygen distribution)
-    - header.html:  contains metadata 
-    - footer.html:   contains the footer seen on each page
+    - header.html: contains metadata 
+    - footer.html: contains the footer seen on each page
+    - changelog.txt: lists changes made since the last release 
     - a merged IDL file with all the IDL concatenated together
     - a zip file containing IDL and doxygen output
     - an api directory which contains the IDL

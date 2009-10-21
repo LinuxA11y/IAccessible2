@@ -74,7 +74,11 @@ enum IA2Role {
   */
   IA2_ROLE_DIRECTORY_PANE,
 
-  /// An editable text object in a toolbar.
+  /** An editable text object in a toolbar.
+   <BR><B>Note:</B> This role has been deprecated.  The edit bar role was meant
+   for a text area in a tool bar. However, to detect a text area in a tool bar
+   the AT can query the parent.
+  */
   IA2_ROLE_EDITBAR,
 
   /// Embedded (OLE) object.

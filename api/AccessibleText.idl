@@ -62,7 +62,10 @@ enum IA2TextBoundaryType {
 								 of the caret.  Note that after the caret moves, the caret offset changes
 								 by the number of characters in the field, e.g. by 8 characters in the 
 								 following date: 03/26/07. */
-  IA2_TEXT_BOUNDARY_WORD,		///< Range is from start of one word to the start of another word.
+  IA2_TEXT_BOUNDARY_WORD,		/**< The range provided matches the range observed when the application
+								 processes the Ctrl + left arrow and Ctrl + right arrow key sequences.
+								 Typically this is from the start of one word to the start of the next, but
+								 various applications are inconsistent in the handling of the end of a line. */
   IA2_TEXT_BOUNDARY_SENTENCE,	///< Range is from start of one sentence to the start of another sentence.
   IA2_TEXT_BOUNDARY_PARAGRAPH,	///< Range is from start of one paragraph to the start of another paragraph.
   IA2_TEXT_BOUNDARY_LINE,		/**< Range is from start of one line to the start of another line. This
@@ -128,7 +131,9 @@ interface IAccessibleText : IUnknown
     The offset of the first character past the character range over which all text 
 	attributes match those of offset. (0 based)
    @param [out] textAttributes  
-    A string of attributes describing the text.  
+    A string of attributes describing the text.  The attributes are described in the
+    <a href="http://www.linuxfoundation.org/en/Accessibility/IAccessible2/TextAttributes">
+    text attributes specification</a> on the %IAccessible2 web site.
    @retval S_OK
    @retval S_FALSE if there is nothing to return, [out] values are 0s and NULL respectively 
    @retval E_INVALIDARG if bad [in] passed, [out] values are 0s and NULL respectively 
@@ -143,14 +148,30 @@ interface IAccessibleText : IUnknown
     );
 
   /** @brief Returns the position of the caret.
-    
-   The caret position/offset is that of the character logically following it,
-   e.g. to the right of it in a left to right language.
+
+   Returns the 0-based offset of the caret within the text.  If the text is 
+   implemented as a tree of text objects with embed characters in higher levels
+   representing substrings of child text objects and the caret is in one of the 
+   child text objects, then the offset in the higher level text object would be
+   at the embed character representing child text object that contains the caret.
+
+   For example, if the string "one two three" is implemented as a two text objects,
+   with a top level text object containing an embed character "one ? three" and a
+   child text object containing "two" and if the caret is in the descendant object
+   just before the 'o' in "two", then:
+   <ul>
+   <li>the caretOffset for the "one ? three" object would be 4, matching the embed character</li>
+   <li>the caretOffset for "two" would be 2, matching the "o"</li>
+   </ul>
+   The caret position/offset is that of the character logically following it, e.g.
+   to the right of it in a left to right language.
    @param [out] offset
     The returned offset is relative to the text represented by this object.
    @retval S_OK
    @retval S_FALSE if the caret is not currently active on this object, i.e. the
     caret is located on some other object.  The returned offset value will be -1.
+   @note S_FALSE (and an offset of -1) will not be returned if the caret is somewhere
+   in the text object or one of its descendants. 
   */
   [propget] HRESULT caretOffset
     (
@@ -254,7 +275,7 @@ interface IAccessibleText : IUnknown
   */
   [propget] HRESULT selection
     (
-     [in] long selectionIndex, ///< index of selection (0 based)
+     [in] long selectionIndex,
      [out] long *startOffset,
      [out, retval] long *endOffset
     );
