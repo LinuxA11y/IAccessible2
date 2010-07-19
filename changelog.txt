@@ -1,39 +1,12 @@
-2009-August-25 Pete Brunet <pete@a11ysoft.com>
+2010-June-21 Pete Brunet <pete@a11ysoft.com>
 
-	Changes from 1.0.2 to 1.1
+	Changes from 1.1 to 1.2
 
 	* doxygen.conf
-	Changed version from 1.0.2 to 1.1
+	- Changed version from 1.1 to 1.2
 
-	* api\Accessible2.idl
-	Genaral Information Section:  
-	- Added trademark attribution section
-	- Added comment: must QI between IA2 interfaces but QS to IAApplication
-
-	* api\AccessibleText.idl
-	- caretOffset:  Describe behavior for hierarchical text objects.
-	- changed the description of IA2_TEXT_BOUNDARY_WORD
-	- IAText::attributes: added link to the text attributes spec on the LF site.
-
-	* api\AccessibleTable2.idl
-	New interface, primarily to use an accessible to access information rather
-	than row/column indexes.
-
-	* api\AccessibleTableCell.idl
-	New interface for table cells; methods were moved out of IAccessibleTable.
-
-	* api\IA2CommonTypes.idl
-	Added enum and struct common to IAccessibleTable and IAccessibleTable2
-
-	* api\AccessibleTable.idl
-	Moved enum and struct to IA2CommonTypes.idl
-
-	* api\AccessibleRelation.idl
-	Documentation changes:
-	- IARelation::relationType: added link to the list of relations
-	- IA2_RELATION_FLOWS_FROM: useful for connecting text and non-text object
-	  in the intended reading order.
+	* api\*.idl
+	- Changed proglogs from LGPL to BSD
 
 	* api\IA2TypeLibrary.idl
-	- Changed vefrsion from 1.0 to 1.1
-	- Changed GUID
+	- Changed version from 1.1 to 1.2

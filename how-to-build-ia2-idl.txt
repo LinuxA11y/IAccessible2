@@ -18,9 +18,11 @@ How to build the IA2 docs, a merged IDL file, a zip file containing the docs and
       - for VC 2008 Express
         - IA2 IDL Test.sln/vcproj, IA2 Merged IDL Test.vcproj, StdAfx.cpp/h
 - The build procedure
-  - CD to the ia2 directory
+  - start cygwin
+  - CD to the directory containing the above files
   - sh buildapi.sh >sh.out
   - notepad sh.out (to check for errors)
+  - exit cygwin
   - the doxgen generated files, merged idl file, and the zip file will be built
   - CD to the ia2\IDL-Test directory
   - activate the sln file
