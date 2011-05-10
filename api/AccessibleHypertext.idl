@@ -91,7 +91,7 @@ interface IAccessibleHypertext : IAccessibleText
     of links minus one, a reference to the specified hyperlink object is returned.  
     If the index is invalid then a NULL pointer is returned.
    @retval S_OK
-   @retval E_INVALIDARG if bad [in] passed, [out] value is NULL 
+   @retval E_INVALIDARG if bad [in] passed
   */
   [propget] HRESULT hyperlink
     (
@@ -112,7 +112,7 @@ interface IAccessibleHypertext : IAccessibleText
 	character index, or -1 if charIndex is not on a link.
    @retval S_OK
    @retval S_FALSE if there is nothing to return, [out] value is -1
-   @retval E_INVALIDARG if bad [in] passed, [out] value is NULL 
+   @retval E_INVALIDARG if bad [in] passed
   */
   [propget] HRESULT hyperlinkIndex
     (

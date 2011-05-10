@@ -97,6 +97,7 @@ interface IAccessibleAction : IUnknown
     0 based index specifying the action to perform.  If it lies outside
     the valid range no action is performed.
    @retval S_OK
+   @retval S_FALSE if action could not be performed
    @retval E_INVALIDARG if bad [in] passed 
     */
   HRESULT doAction
@@ -112,7 +113,7 @@ interface IAccessibleAction : IUnknown
     The returned value is a localized string of the specified action.
    @retval S_OK
    @retval S_FALSE if there is nothing to return, [out] value is NULL 
-   @retval E_INVALIDARG if bad [in] passed, [out] value is NULL 
+   @retval E_INVALIDARG if bad [in] passed
     */
   [propget] HRESULT description
     (
@@ -151,8 +152,8 @@ interface IAccessibleAction : IUnknown
    @param [out] nBindings
     The number of key bindings returned; the size of the returned array.
    @retval S_OK
-   @retval S_FALSE if there are no relations, [out] values are NULL and 0 respectively 
-   @retval E_INVALIDARG if bad [in] passed, [out] values are NULL and 0 respectively 
+   @retval S_FALSE if there are no key bindings, [out] values are NULL and 0 respectively 
+   @retval E_INVALIDARG if bad [in] passed
 	*/
   [propget] HRESULT keyBinding
     (
@@ -168,7 +169,7 @@ interface IAccessibleAction : IUnknown
    @param [out] name
    @retval S_OK
    @retval S_FALSE if there is nothing to return, [out] value is NULL 
-   @retval E_INVALIDARG if bad [in] passed, [out] value is NULL 
+   @retval E_INVALIDARG if bad [in] passed
    */
   [propget] HRESULT name
     (
@@ -182,7 +183,7 @@ interface IAccessibleAction : IUnknown
    @param [out] localizedName
    @retval S_OK
    @retval S_FALSE if there is nothing to return, [out] value is NULL 
-   @retval E_INVALIDARG if bad [in] passed, [out] value is NULL 
+   @retval E_INVALIDARG if bad [in] passed
    */
   [propget] HRESULT localizedName
     (

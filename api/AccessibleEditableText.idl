@@ -81,8 +81,8 @@ interface IAccessibleEditableText : IUnknown
 
   /** @brief Copies the text range into the clipboard.
     
-   The specified text between the two given indices is copied into the
-    system clipboard.  
+   The selection is set to the specified offsets and then selection is copied into
+   the system clipboard.
         
    @param [in] startOffset
     Start index of the text to moved into the clipboard.
@@ -92,6 +92,10 @@ interface IAccessibleEditableText : IUnknown
     The valid range is 0..length.
    @retval S_OK
    @retval E_INVALIDARG if bad [in] passed
+   @note Refer to @ref _specialOffsets 
+    "Special Offsets for use in the IAccessibleText and IAccessibleEditableText Methods" 
+    for information about special offsets that can be used in %IAccessibleEditableText
+    methods.
   */
   HRESULT copyText
     (
@@ -112,6 +116,10 @@ interface IAccessibleEditableText : IUnknown
     The valid range is 0..length.
    @retval S_OK
    @retval E_INVALIDARG if bad [in] passed
+   @note Refer to @ref _specialOffsets 
+    "Special Offsets for use in the IAccessibleText and IAccessibleEditableText Methods" 
+    for information about special offsets that can be used in %IAccessibleEditableText
+    methods.
   */
   HRESULT deleteText
     (
@@ -127,6 +135,10 @@ interface IAccessibleEditableText : IUnknown
    @param [in] offset
     Index at which to insert the text.
     The valid range is 0..length.
+	Refer to @ref _specialOffsets 
+    "Special Offsets for use in the IAccessibleText and IAccessibleEditableText Methods" 
+    for information about special offsets that can be used in %IAccessibleEditableText
+    methods.
    @param [in] text
     Text that is inserted.
    @retval S_OK
@@ -140,8 +152,8 @@ interface IAccessibleEditableText : IUnknown
   
   /** @brief Deletes a range of text and copies it to the clipboard.
     
-   The text between the two given indices is deleted from the text
-    represented by this object and copied to the clipboard.
+   The selection is set to the specified offsets, the selection is then copied into
+    the system clipboard, and then the selection is deleted.
 
    @param [in] startOffset
     Start index of the text to be deleted.
@@ -151,6 +163,10 @@ interface IAccessibleEditableText : IUnknown
     The valid range is 0..length.
    @retval S_OK
    @retval E_INVALIDARG if bad [in] passed
+   @note Refer to @ref _specialOffsets 
+    "Special Offsets for use in the IAccessibleText and IAccessibleEditableText Methods" 
+    for information about special offsets that can be used in %IAccessibleEditableText
+    methods.
   */
   HRESULT cutText
     (
@@ -158,17 +174,22 @@ interface IAccessibleEditableText : IUnknown
      [in] long endOffset
     );
 
-  /** @brief Pastes text from the clipboard.
+  /** @brief Pastes content from the clipboard.
     
-   The text in the system clipboard is pasted into the text represented
-    by this object at the given index.  This method is similar to the 
-	IAccessibleEditableText::insertText method. If the index is not valid 
-	the system clipboard text is not inserted.
-   
+   Any existing selection is removed, the clipboard content is then pasted into 
+    this object's text at the given offset.  This method is similar to the insertText
+    method.  If the index is not valid the system clipboard content is not inserted. The
+    behavior is the same as	when Ctrl+V is used, i.e. the pasted contents are not
+    necessarily plain text.
+  
    @param [in] offset
-    Index at which to insert the text from the system clipboard into
+    Index at which to insert the content from the system clipboard into
     the text represented by this object.
     The valid range is 0..length.
+	Refer to @ref _specialOffsets 
+    "Special Offsets for use in the IAccessibleText and IAccessibleEditableText Methods" 
+    for information about special offsets that can be used in %IAccessibleEditableText
+    methods.
    @retval S_OK
    @retval E_INVALIDARG if bad [in] passed
   */
@@ -189,12 +210,16 @@ interface IAccessibleEditableText : IUnknown
     Start index of the text to be replaced.
     The valid range is 0..length.
    @param [in] endOffset
-    Start index of the text to be replaced.
+    End index of the text to be replaced.
     The valid range is 0..length.
    @param [in] text
     The Text that replaces the text between the given indices.
    @retval S_OK
    @retval E_INVALIDARG if bad [in] passed
+   @note Refer to @ref _specialOffsets 
+    "Special Offsets for use in the IAccessibleText and IAccessibleEditableText Methods" 
+    for information about special offsets that can be used in %IAccessibleEditableText
+    methods.
   */
   HRESULT replaceText
     (
@@ -212,13 +237,17 @@ interface IAccessibleEditableText : IUnknown
     Start index of the text whose attributes are modified.
     The valid range is 0..length.
    @param [in] endOffset
-    Start index of the text whose attributes are modified.
+    End index of the text whose attributes are modified.
     The valid range is 0..length.
    @param [in] attributes
     Set of attributes that replaces the old list of attributes of
     the specified text portion.
    @retval S_OK
    @retval E_INVALIDARG if bad [in] passed
+   @note Refer to @ref _specialOffsets 
+    "Special Offsets for use in the IAccessibleText and IAccessibleEditableText Methods" 
+    for information about special offsets that can be used in %IAccessibleEditableText
+    methods.
   */
   HRESULT setAttributes
     (

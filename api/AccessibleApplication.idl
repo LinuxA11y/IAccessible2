@@ -83,6 +83,9 @@ interface IAccessibleApplication : IUnknown
 
   /** @brief Returns the application version.
    @param [out] version
+    The version string must not contain levels when it is know beforehand that
+    this information will never require a change in a client's behavior.
+    For example, use "3.6.0" rather than "3.6.0.v201005131500".
    @retval S_OK
    @retval S_FALSE if there is nothing to return, [out] value is NULL
   */
@@ -103,6 +106,9 @@ interface IAccessibleApplication : IUnknown
 
   /** @brief Returns the toolkit/bridge version.
    @param [out] version
+    The version string must not contain levels when it is know beforehand that
+    this information will never require a change in a client's behavior.
+    For example, use "3.6.0" rather than "3.6.0.v201005131500".
    @retval S_OK
    @retval S_FALSE if there is nothing to return, [out] value is NULL
   */

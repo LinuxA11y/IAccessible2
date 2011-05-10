@@ -68,6 +68,7 @@ cpp_quote("")
 library IAccessible2Lib
 {
     importlib ("stdole2.tlb");
+    importlib ("oleacc.dll");
     interface IAccessible2;
     interface IAccessibleAction;
     interface IAccessibleApplication;

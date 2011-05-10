@@ -79,7 +79,7 @@ interface IAccessibleTable2 : IUnknown
     object is returned that represents the requested cell regardless of whether 
     the cell is currently visible (on the screen).
    @retval S_OK
-   @retval E_INVALIDARG if bad [in] passed, [out] value is NULL 
+   @retval E_INVALIDARG if bad [in] passed
   */
   [propget] HRESULT cellAt
     (
@@ -109,7 +109,7 @@ interface IAccessibleTable2 : IUnknown
     description exists.  Otherwise a NULL pointer is returned.
    @retval S_OK
    @retval S_FALSE if there is nothing to return, [out] value is NULL 
-   @retval E_INVALIDARG if bad [in] passed, [out] value is NULL
+   @retval E_INVALIDARG if bad [in] passed
   */
   [propget] HRESULT columnDescription
     (
@@ -176,7 +176,7 @@ interface IAccessibleTable2 : IUnknown
     description exists.  Otherwise a NULL pointer is returned.
    @retval S_OK
    @retval S_FALSE if there is nothing to return, [out] value is NULL 
-   @retval E_INVALIDARG if bad [in] passed, [out] value is NULL
+   @retval E_INVALIDARG if bad [in] passed
   */
   [propget] HRESULT rowDescription
     (
@@ -187,7 +187,8 @@ interface IAccessibleTable2 : IUnknown
   /** @brief Returns a list of accessibles currently selected.
    @param [out] cells
     Pointer to an array of references to selected accessibles.  The array is
-    allocated by the server.  Free it with CoTaskMemFree.
+    allocated by the server with CoTaskMemAlloc and freed by the client with
+    CoTaskMemFree.
    @param [out] nSelectedCells
     The number of accessibles returned; the size of the returned array.
    @retval S_OK
@@ -202,7 +203,8 @@ interface IAccessibleTable2 : IUnknown
   /** @brief Returns a list of column indexes currently selected (0 based).
    @param [out] selectedColumns
     A pointer to an array of column indexes of selected columns (each index is
-    0 based).  The array is allocated by the server. Free it with CoTaskMemFree.
+    0 based).  The array is allocated by the server with CoTaskMemAlloc and
+    freed by the client with CoTaskMemFree.
    @param [out] nColumns
     The number of column indexes returned; the size of the returned array.
    @retval S_OK
@@ -216,8 +218,9 @@ interface IAccessibleTable2 : IUnknown
 
   /** @brief Returns a list of row indexes currently selected (0 based).
    @param [out] selectedRows
-    An array of row indexes of selected rows (each index is 0 based), allocated
-    by the server. Free it with CoTaskMemFree.
+    An array of row indexes of selected rows (each index is 0 based).  The array
+    is allocated by the server with CoTaskMemAlloc and freed by the client with
+    CoTaskMemFree.
    @param [out] nRows
     The number of row indexes returned; the size of the returned array.
    @retval S_OK
@@ -250,7 +253,7 @@ interface IAccessibleTable2 : IUnknown
    @param [out] isSelected
     Returns TRUE if the specified column is selected completely and FALSE otherwise.
    @retval S_OK
-   @retval E_INVALIDARG if bad [in] passed, [out] value is FALSE
+   @retval E_INVALIDARG if bad [in] passed
   */
   [propget] HRESULT isColumnSelected
     (
@@ -265,7 +268,7 @@ interface IAccessibleTable2 : IUnknown
    @param [out] isSelected
     Returns TRUE if the specified row is selected completely and FALSE otherwise.
    @retval S_OK
-   @retval E_INVALIDARG if bad [in] passed, [out] value is FALSE
+   @retval E_INVALIDARG if bad [in] passed
   */
   [propget] HRESULT isRowSelected
     (

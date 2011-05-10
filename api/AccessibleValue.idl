@@ -74,7 +74,7 @@ interface IAccessibleValue : IUnknown
     Returns the current value represented by this object.  See the section about 
 	@ref _variants "VARIANTs" for additional information.
    @retval S_OK
-   @retval S_FALSE if there is nothing to return, [out] value is NULL
+   @retval S_FALSE if there is nothing to return, [out] value is a VARIANT with vt = VT_EMPTY
   */
   [propget] HRESULT currentValue
     (
@@ -89,7 +89,7 @@ interface IAccessibleValue : IUnknown
 	value the new value will be the minimum and if it is greater than the 
 	maximum then the new value will be the maximum.
 
-   @param [out] value
+   @param [in] value
     The new value represented by this object.  The set of admissible types for 
     this argument is implementation dependent.
    @retval S_OK
@@ -109,6 +109,7 @@ interface IAccessibleValue : IUnknown
     has no upper bound then an empty object is returned.  See the section about 
 	@ref _variants "VARIANTs" for additional information.
    @retval S_OK
+   @retval S_FALSE if there is nothing to return, [out] value is a VARIANT with vt = VT_EMPTY
   */
   [propget] HRESULT maximumValue
     (
@@ -125,6 +126,7 @@ interface IAccessibleValue : IUnknown
     has no lower bound then an empty object is returned.  See the section about 
 	@ref _variants "VARIANTs" for additional information.
    @retval S_OK
+   @retval S_FALSE if there is nothing to return, [out] value is a VARIANT with vt = VT_EMPTY
   */
   [propget] HRESULT minimumValue
     (

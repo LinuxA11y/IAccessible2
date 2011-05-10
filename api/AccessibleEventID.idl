@@ -63,7 +63,7 @@ enum IA2EventID {
   */
   IA2_EVENT_ACTION_CHANGED = 0x101,
 
-  /** The active descendant of a component has changed.
+  /** <b>Deprecated.</b> The active descendant of a component has changed.
 	
 	Note: This event constant is misspelled and thus is deprecated and will be
 	removed in a later version. Please use the correctly spelled version which

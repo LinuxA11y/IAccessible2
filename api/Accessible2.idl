@@ -62,7 +62,7 @@
   IAccessibleHyperlink\n
   IAccessibleImage\n
   IAccessibleRelation\n
-  IAccessibleTable [deprecated]\n
+  IAccessibleTable [Deprecated]\n
   IAccessibleTable2\n
   IAccessibleTableCell\n
   IAccessibleText\n
@@ -196,19 +196,20 @@
    String: What are the rules for BSTR allocation and deallocation?</a>
 
  @subsection _arrayConsideration Special Consideration when using Arrays
-  There are several methods which return arrays.  It is considered a best practice
-  for the client to allocate and free the arrays.  This can be done for 
-  IAccessible2::relations and IAccessibleRelation::targets.  However, due to the
-  coding of the IDL for the remaining methods which return arrays, the server must
-  allocate the array and the client must free the array when no longer needed.  
-  These methods are IAccessible2::extendedStates, IAccessible2::localizedExtendedStates, 
-  IAccessibleAction::keyBinding, IAccessibleTable::selectedChildren, 
-  IAccessibleTable::selectedColumns, and IAccessibleTable::selectedRows.  For those 
-  methods, the server must allocate both the top level array and any storage 
-  associated with it, e.g. for BSTRs.  The client must use CoTaskMemFree to free
-  the array and any BSTRs must be freed with SysFreeString.  
+  There are several methods which return arrays.  In the case of IAccessible2::relations
+  and IAccessibleRelation::targets the client must allocate and free the arrays.
+
+  For the remaining methods which return arrays, the server must allocate the array
+  and the client must free the array when no longer needed.  These methods are
+  IAccessible2::extendedStates, IAccessible2::localizedExtendedStates, 
+  IAccessibleAction::keyBinding, IAccessibleTable2::selectedCells, 
+  IAccessibleTable2::selectedColumns, and IAccessibleTable2::selectedRows.  For
+  those methods, the server must allocate both the top level array and any storage 
+  associated with it, e.g. for BSTRs.  The server must allocate the arrays with 
+  CoTaskMemAlloc and any BSTRs with SysAllocString.  The client must use CoTaskMemFree
+  to free the array and any BSTRs must be freed with SysFreeString.  
   
-  Also, the IDL for those methods includes an extraneous [in] parameter for the 
+  Also, the IDL for those six methods includes an extraneous [in] parameter for the 
   caller to specify the max size of the array.  This parameter will be ignored by 
   the COM server.
 
@@ -255,13 +256,11 @@
   } 
   @endcode
 
- @section _changingInterfaces Changing between Accessible Interfaces
-  Note that developers must always implement MSAA's IAccessible and, if needed, some 
-  of the interfaces in the set of IAccessible2 interfaces.  Although the IAccessible2 
-  IDL is currently coded such that IAccessible2 is a subclass of MSAA's IAccessible, 
-  none of MSAA's IAccessible methods are overridden or extended.  In order to allow 
-  future removal of the inheritance, Assistive Technologies (ATs) should not rely on 
-  that inheritance. 
+  @section _changingInterfaces Changing between Accessible Interfaces
+  Note that developers must always implement MSAA's IAccessible and, if needed, some
+  of the interfaces in the set of IAccessible2 interfaces.  Although the IAccessible2
+  IDL is coded such that IAccessible2 is a subclass of MSAA's IAccessible, none of
+  MSAA's IAccessible methods are redefined by IAccessible2.
 
   QueryService must be used to switch from a reference to an MSAA IAccessible interface 
   to another interface.  This has been 
@@ -356,13 +355,15 @@ typedef struct IA2Locale {
   BSTR variant;  ///< Application specific variant of the locale
 } IA2Locale;
 
-/** This interface must always be provided for objects that support some
+/** @brief This interface exposes the primary set of information about an
+ IAccessible2 enabled accessible object.
+
+ This interface must always be provided for objects that support some
  portion of the collection of the %IAccessible2 interfaces.
 
  Please refer to @ref _changingInterfaces "Changing between Accessible Interfaces"
  for special considerations related to use of the MSAA IAccessible interface and 
  the set of %IAccessible2 interfaces.
-
  */
 [object, uuid(E89F726E-C4F4-4c19-BB19-B647D7FA8478)]
 interface IAccessible2 : IAccessible
@@ -382,7 +383,7 @@ interface IAccessible2 : IAccessible
      0 based
    @param [out] relation
    @retval S_OK
-   @retval E_INVALIDARG if bad [in] passed, [out] value is NULL
+   @retval E_INVALIDARG if bad [in] passed
   */
   [propget] HRESULT relation
     (
@@ -470,16 +471,19 @@ interface IAccessible2 : IAccessible
     1 based, 0 indicates that this value is not applicable
    @param [out] positionInGroup
     1 based, 0 indicates that this value is not applicable. This is an index
-	into the objects in the current group, not an index into all the objects
-	at the same group level.
+    into the objects in the current group, not an index into all the objects
+    at the same group level.
    @retval S_OK if at least one value is valid
-   @retval S_FALSE if no values are valid
+   @retval S_FALSE if no values are valid, [out] values are 0s
    @note This method is meant to describe the nature of an object's containment
-    structure.  This is normally not implemented on a combo box to describe the nature
+    structure.  It's exposed by trees, tree grids, nested lists, nested menus,
+    but not headings, which uses the level object attribute.  It is also exposed
+    by radio buttons (with groupLevel == 0).
+   @note This is normally not implemented on a combo box to describe the nature
     of its contents.  Normally an AT will get that information from its child list 
-	object.  However, in some cases when combo boxes are not able to be structured
-	such that the list is a child of the combo box, this method is implemented
-	on the combo box itself. ATs can use this interface if a child list is not found.
+    object.  However, in some cases when non-edit combo boxes are not able to be structured
+    such that the list is a child of the combo box, this method is implemented on
+    the combo box itself. ATs can use this interface if a child list is not found.
 	*/
   [propget] HRESULT groupPosition
     (
@@ -606,7 +610,11 @@ interface IAccessible2 : IAccessible
    One means of implementing this would be to create a factory with a 32 bit number 
    generator and a reuse pool.  The number generator would emit numbers starting 
    at 1.  Each time an object's life cycle ended, its number would be saved into a 
-   resuse pool.  The number generator would be used whenever the reuse pool was empty.
+   reuse pool.  The number generator would be used whenever the reuse pool was empty.
+
+   Another way to create a unique ID is to generate it from a pointer value, e.g. an
+   object's address. That would be unique because no two active objects can use the
+   same allocated memory space.
 
    @param [out] uniqueID
    @retval S_OK

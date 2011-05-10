@@ -118,7 +118,7 @@ const WCHAR *const IA2_RELATION_NODE_CHILD_OF = L"nodeChildOf";
 const WCHAR *const IA2_RELATION_PARENT_WINDOW_OF = L"parentWindowOf";
 
 /** This object is a transient component related to the target object. 
- When this object is activated the target object doesn't loose focus.
+ When this object is activated the target object doesn't lose focus.
 */
 const WCHAR *const IA2_RELATION_POPUP_FOR = L"popupFor";
 
@@ -164,8 +164,7 @@ interface IAccessibleRelation : IUnknown
     0 based index
    @param [out] target
    @retval S_OK
-   @retval S_FALSE if there is nothing to return, [out] value is NULL
-   @retval E_INVALIDARG if bad [in] passed, [out] value is NULL 
+   @retval E_INVALIDARG if bad [in] passed
    @note Use QueryInterface to get IAccessible2.
   */
   [propget] HRESULT target
@@ -185,7 +184,7 @@ interface IAccessibleRelation : IUnknown
    @param [out] nTargets
 	actual number of targets in the returned array (not more than maxTargets)
    @retval S_OK
-   @retval S_FALSE if there is nothing to return, nTargets is set to 0
+   @retval E_INVALIDARG if bad [in] passed, e.g. a negative value
   */
   [propget] HRESULT targets
     (

@@ -111,8 +111,7 @@ interface IAccessibleHyperlink : IAccessibleAction
 	an IUnknown VARIANT for IAccessibleImage.  See the section about 
 	@ref _variants "VARIANTs" for additional information.
    @retval S_OK
-   @retval S_FALSE if there is nothing to return, [out] value is NULL 
-   @retval E_INVALIDARG if bad [in] passed, [out] value is NULL 
+   @retval E_INVALIDARG if bad [in] passed
   */
   [propget] HRESULT anchor
     (
@@ -133,8 +132,7 @@ interface IAccessibleHyperlink : IAccessibleAction
 	activated when the link is activated.  See the section about 
 	@ref _variants "VARIANTs" for additional information.
    @retval S_OK
-   @retval S_FALSE if there is nothing to return, [out] value is NULL 
-   @retval E_INVALIDARG if bad [in] passed, [out] value is NULL 
+   @retval E_INVALIDARG if bad [in] passed
   */
   [propget] HRESULT anchorTarget
     (
@@ -174,12 +172,13 @@ interface IAccessibleHyperlink : IAccessibleAction
    This has also been used to indicate whether or not the URI of the anchorTarget
    is malformed.
 
-   Note: This method is not being used, is deprecated, and should not be implemented or
-   used.  It is likely that this method will be removed in a later version of the IDL.
-
    @param [out] valid
+    If false, one or more of the object's links are invalid.
+	If true, all of the object's links are valid.
    @retval S_OK
-   @retval S_FALSE if there is nothing to return, [out] value is FALSE 
+   @retval S_FALSE if there is nothing to return, [out] value is FALSE
+   @note This method is not being used, is deprecated, and should not be implemented or
+    used.  It is likely that this method will be removed in a later version of the IDL.
   */
   [propget] HRESULT valid
     (

@@ -18,6 +18,10 @@ How to build the IA2 docs, a merged IDL file, a zip file containing the docs and
       - for VC 2008 Express
         - IA2 IDL Test.sln/vcproj, IA2 Merged IDL Test.vcproj, StdAfx.cpp/h
 - The build procedure
+  - don't forget to change the version number is doxygen.conf, header.html, and IA2TypeLibrary.idl
+    note: the type library version number can only be in major.minor format, e.g. not 1.2.1.
+  - don't forget to change the version and date in the errata file 
+  - don't forget to create a changelog.txt file
   - start cygwin
   - CD to the directory containing the above files
   - sh buildapi.sh >sh.out

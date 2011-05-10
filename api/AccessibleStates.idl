@@ -92,7 +92,12 @@ IA2_STATE_ARMED =					0x2,
 /** Indicates the user interface object corresponding to this object no longer exists. */
 IA2_STATE_DEFUNCT =					0x4,
 
-/** Indicates the user can change the contents of this object. */
+/** An object with this state has a caret and implements the IAccessibleText interface.
+  
+ Such fields may be read-only, so STATE_SYSTEM_READONLY is valid in combination
+  with IA2_STATE_EDITABLE.
+
+*/
 IA2_STATE_EDITABLE =				0x8,
 
 /** Indicates the orientation of this object is horizontal. */
@@ -178,6 +183,27 @@ IA2_STATE_SUPPORTS_AUTOCOMPLETION =	0x8000,
 IA2_STATE_TRANSIENT =				0x10000,
 
 /** Indicates the orientation of this object is vertical. */
-IA2_STATE_VERTICAL =				0x20000
+IA2_STATE_VERTICAL =				0x20000,
+
+/** Indicates this object is checkable.
+
+ The standard checkable objects are check boxes, radio buttons, check box menu
+ items, radio menu items, and toggle buttons.  Since assistive technology will
+ determine that these objects are checkable via the object's role the checkable
+ state is not required.  However, this state is necessary in those cases where
+ an object has a role which is not one of the previously mentioned roles.  An
+ example is a table cell which indicates whether or not an email has an attachment,
+ whether or not an mail is considered spam, and whether or not an email has been read.
+ */
+IA2_STATE_CHECKABLE =				0x40000,
+
+/** Indicates this object is pinned.
+
+ This state indicates that an object is fixed at a certain location.  One example
+ is a browser tab that when pinned cannot be moved until unpinned.  Another example
+ is a movable or floating object that when pinned remains in its pinned location
+ until being unpinned.
+ */
+IA2_STATE_PINNED =					0x80000
 
 };

@@ -1,12 +1,82 @@
-2010-June-21 Pete Brunet <pete@a11ysoft.com>
+2011-January-21 Pete Brunet <pete@a11ysoft.com>
 
-	Changes from 1.1 to 1.2
+	Changes from 1.2 to 1.2.1
 
 	* doxygen.conf
-	- Changed version from 1.1 to 1.2
+	- Changed version from 1.2 to 1.2.1
 
-	* api\*.idl
-	- Changed proglogs from LGPL to BSD
+	* api\AccessibleRole.idl
+        - Added IA2_ROLE_COMPLEMENTARY_CONTENT
+	- For the heading role, the associated object attribute is level, not heading-level
+
+	* api\AccessibleStates.idl
+	- Added IA2_STATE_CHECKABLE and IA2_STATE_PINNED
+	- Provided a better description of IA2_STATE_EDITABLE
+
+	* api\Accessible2.idl
+	- Fix typos specified in bugs 288, 289
+	- Remove warning to not implement reliance on IA2 deriving from IAccessible (see bug 117)
+	- Fix bug 434: In General Information, Memory Management, Special Consideration
+	  when using Arrays remove mention of "best practices"
+	- In that same section mention that arrays are allocated with CoTaskMemAlloc
+	  and BSTRs are allocated with SysAllocString
+	- Remove mention of any required return values when HRESULT is E_INVALIDARG
+	- groupPosition:
+	  - For S_FALSE indicate that [out] values are 0s
+	  - The comments about a combo box should indicate a non-edit combo box
+	  - Describe which controls expose this property
+
+	* api\AccessibleAction.idl
+	- Fix typo specified in bug 431
+	- Fix typo: change relations to key bindings
+	- Remove mention of any required return values when HRESULT is E_INVALIDARG
+
+	* api\AccessibleApplication
+	- Don't overspecify the version string, e.g. use "3.6.0" rather than "3.6.0.v201005131500".
+
+	* api\AccessibleHyperlink.idl
+	- valid: This method is deprecated
+	- Clarifed what valid method returns (even though it's deprecated)
+	- Remove mention of any required return values when HRESULT is E_INVALIDARG
+	- anchor and anchorTarget: remove return value of S_FALSE
+
+	* api\AccessibleHypertext.idl
+	- Remove mention of any required return values when HRESULT is E_INVALIDARG
+
+	* api\AccessibleRelation.idl
+	- Remove mention of any required return values when HRESULT is E_INVALIDARG
+	- Fix typo, change loose to lose.
+	- target and targets: remove S_FALSE
+	- targets: add E_INVALIDARG (for negative maxValue)
+
+	* api\AccessibleTable2.idl
+	- Fix bug 435, i.e. mention using CoTaskMemAlloc to allocate arrays
+	- Remove mention of any required return values when HRESULT is E_INVALIDARG
+
+	* api\AccessibleText.idl
+	- Fix typos specified in bugs 290, 429, 432
+	- Fix bug 437: add mention of special offsets
+	- selection: describe what offset should be returned when text is represented
+	  in a hierarchical structure (as is common with Firefox)
+	- old/newText: when returning S_FALSE the values IA2TextSegment are
+	  text = NULL, start = 0, end = 0
+	- Remove mention of any required return values when HRESULT is E_INVALIDARG
+	- selection: remove return value of S_FALSE
+	- offsetAtPoint: add return value of S_FALSE
+
+	* api\AccessibleEditableText.idl
+	- Fix bug 437: add mention of special offsets
+	- replaceText/setAttributes typo on endOffset, should be End, not Start
+	- cutText: set selection to specified offsets; copy selected text to the clipboard;
+	  delete selected text
+	- copyText: set selection to specified offsets; copy selected text to the clipboard
+	- pasteText: remove any selections; insert text
+	- pasteText: the pasted contents may not necessarily be plain text
+
+	* api\AccessibleValue.idl
+	- Fix typo specificed in bug 430
+	- currentValue: when returning S_FALSE specify that [out] value is an empty variant
+	- minimum/maximumValue:  Add S_FALSE
 
 	* api\IA2TypeLibrary.idl
-	- Changed version from 1.1 to 1.2
+        - add: importlib ("oleacc.dll");

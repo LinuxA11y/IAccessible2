@@ -101,10 +101,9 @@ enum IA2Role {
   */
   IA2_ROLE_DIRECTORY_PANE,
 
-  /** An editable text object in a toolbar.
-   <BR><B>Note:</B> This role has been deprecated.  The edit bar role was meant
-   for a text area in a tool bar. However, to detect a text area in a tool bar
-   the AT can query the parent.
+  /** An editable text object in a toolbar. <b>Deprecated.</b>
+   The edit bar role was meant for a text area in a tool bar. However, to detect
+   a text area in a tool bar the AT can query the parent.
   */
   IA2_ROLE_EDITBAR,
 
@@ -157,7 +156,7 @@ enum IA2Role {
   */
   IA2_ROLE_HEADER,
 
-  /// Heading.  Use the IAccessible2::attributes heading-level attribute to determine the heading level.
+  /// Heading.  Use the IAccessible2::attributes level attribute to determine the heading level.
   IA2_ROLE_HEADING,
 
   /// A small fixed size picture, typically used to decorate components.
@@ -278,6 +277,17 @@ enum IA2Role {
    the scroll bars, the contents of the viewport can change.
    Also refer to ::IA2_ROLE_SCROLL_PANE.
   */
-  IA2_ROLE_VIEW_PORT
+  IA2_ROLE_VIEW_PORT,
+
+  /** An object containing content which is complementary to the main content of
+   a document, but remains meaningful when separated from the main content.  There
+   are various types of content that would appropriately have this role.  For example,
+   in the case where content is delivered via a web portal to a web browser, this may
+   include but not be limited to show times, current weather, related articles, or
+   stocks to watch.  The complementary role indicates that contained content is relevant
+   to the main content.  If the complementary content is completely separable main
+   content, it may be appropriate to use a more general role.
+  */
+  IA2_ROLE_COMPLEMENTARY_CONTENT
   
 };
