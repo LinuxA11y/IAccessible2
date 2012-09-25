@@ -1,12 +1,10 @@
 /*************************************************************************
  *
- *  File Name (IA2TypeLibrary.idl)
+ *  File Name (AccessibleDocument.idl)
  * 
  *  IAccessible2 IDL Specification 
  * 
- *  Copyright (c) 2007, 2012 Linux Foundation 
- *  Copyright (c) 2006 IBM Corporation 
- *  Copyright (c) 2000, 2006 Sun Microsystems, Inc. 
+ *  Copyright (c) 2012 Linux Foundation 
  *  All rights reserved. 
  *   
  *   
@@ -51,48 +49,29 @@
  * 
  ************************************************************************/ 
 
-// This is not a standalone file.  It is to be appended to the end of the 
-// merged IDL file.
+import "objidl.idl";
+import "oaidl.idl";
+import "oleacc.idl";
 
-cpp_quote("")
-cpp_quote("// Type Library Definitions")
-cpp_quote("")
+/** @brief This interface represents documents.
 
-[
-    uuid(CE3F726E-D1D3-44FE-B995-FF1DB3B48B2B),
-    helpstring("IAccessible2 Type Library"),
-    version(1.3),
-    hidden
-]
-
-library IAccessible2Lib
+ This interface is used for a representation of documents.
+*/
+[object, uuid(C48C7FCF-4AB5-4056-AFA6-902D6E1D1149)]
+interface IAccessibleDocument : IUnknown
 {
-    importlib ("stdole2.tlb");
-    importlib ("oleacc.dll");
-    interface IAccessible2;
-    interface IAccessible2_2;
-    interface IAccessibleAction;
-    interface IAccessibleApplication;
-    interface IAccessibleComponent;
-    interface IAccessibleDocument;
-    interface IAccessibleEditableText;
-    interface IAccessibleHyperlink;
-    interface IAccessibleHypertext;
-    interface IAccessibleHypertext2;
-    interface IAccessibleImage;
-    interface IAccessibleRelation;
-    interface IAccessibleTable;
-    interface IAccessibleTable2;
-    interface IAccessibleTableCell;
-    interface IAccessibleText;
-    interface IAccessibleText2;
-    interface IAccessibleValue;
-    enum IA2CoordinateType;
-    enum IA2EventID;
-    enum IA2Role;
-    enum IA2ScrollType;
-    enum IA2States;
-    enum IA2TableModelChangeType;
-    enum IA2TextBoundaryType;
-    enum IA2TextSpecialOffsets;
+  /** @brief Returns the most recently used anchor target within an HTML document.
+  
+   Anchor targets are those which has been defined with the <a> tag.  An HTML page's
+    most recently targeted in-page anchor is returned.
+
+   @param [out] accessible
+   @retval S_OK
+   @retval S_FALSE if there are no existing valid anchor targets, [out] value is NULL.
+  */
+  [propget] HRESULT anchorTarget
+    (
+     [out, retval] IUnknown **accessible
+    );
+
 }

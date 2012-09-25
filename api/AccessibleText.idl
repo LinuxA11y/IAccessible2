@@ -468,8 +468,8 @@ interface IAccessibleText : IUnknown
     NULL pointer is returned.
 
    @param [in] offset
-    Index of the character for which to return the text part before it.  The index 
-    character will not be part of the returned string. The valid range is 0..length.
+    Index of the character for which to return the text part it belongs to.  The valid
+    range is 0..length.
 	Refer to @ref _specialOffsets 
     "Special Offsets for use in the IAccessibleText and IAccessibleEditableText Methods" 
     for information about special offsets that can be used in %IAccessibleText methods.

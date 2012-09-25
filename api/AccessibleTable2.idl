@@ -4,7 +4,7 @@
  * 
  *  IAccessible2 IDL Specification 
  * 
- *  Copyright (c) 2007, 2010 Linux Foundation 
+ *  Copyright (c) 2007, 2012 Linux Foundation 
  *  Copyright (c) 2006 IBM Corporation 
  *  Copyright (c) 2000, 2006 Sun Microsystems, Inc. 
  *  All rights reserved. 
@@ -94,7 +94,8 @@ interface IAccessibleTable2 : IUnknown
     If the table has a caption then a reference to it is returned, else a NULL 
     pointer is returned.
    @retval S_OK
-   @retval S_FALSE if there is nothing to return, [out] value is NULL 
+   @retval S_FALSE if there is nothing to return, [out] value is NULL
+   @deprecated use a describedBy relation
   */
   [propget] HRESULT caption
     (
@@ -196,7 +197,7 @@ interface IAccessibleTable2 : IUnknown
   */
   [propget] HRESULT selectedCells
     (
-     [out, size_is(,*nSelectedCells,)] IUnknown ***cells,
+     [out, size_is(,*nSelectedCells)] IUnknown ***cells,
      [out, retval] long *nSelectedCells
     );
 
@@ -239,7 +240,8 @@ interface IAccessibleTable2 : IUnknown
     representing the table's summary or a NULL pointer if the table 
     does not support a summary.
    @retval S_OK
-   @retval S_FALSE if there is nothing to return, [out] value is NULL 
+   @retval S_FALSE if there is nothing to return, [out] value is NULL
+   @deprecated Use the labeledBy relation
   */
   [propget] HRESULT summary
     (

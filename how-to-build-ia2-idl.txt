@@ -1,3 +1,17 @@
+Setup
+
+After cygwin install had to
+- install the cygwin zip utility (in the Archive category)
+- install openssh and rsync (in the Net category)
+- run this at the command prompt
+    mkpasswd -l > /etc/passwd
+    Note: On a later install on another machine I didn't have to do this
+
+Had to update my doxygen.conf from 1.5.8 to 1.8.2 (to be compatible with the latest version) using 
+  doxygen -s -u doxygen.conf (-s = no comments, -u = update)
+  Note: If the config file spec hasn't changed this won't be necessary
+
+
 How to build the IA2 docs, a merged IDL file, a zip file containing the docs and IDL files.
 - The directory tree...
   - ia2 contains:
@@ -7,6 +21,7 @@ How to build the IA2 docs, a merged IDL file, a zip file containing the docs and
     - doxygen.css: the doxygen css file (tweaked from the doxygen distribution)
     - header.html: contains metadata 
     - footer.html: contains the footer seen on each page
+    - ia2-<version>-errata.html: info about changes and bug reporting
     - changelog.txt: lists changes made since the last release 
     - a merged IDL file with all the IDL concatenated together
     - a zip file containing IDL and doxygen output
@@ -18,9 +33,10 @@ How to build the IA2 docs, a merged IDL file, a zip file containing the docs and
       - for VC 2008 Express
         - IA2 IDL Test.sln/vcproj, IA2 Merged IDL Test.vcproj, StdAfx.cpp/h
 - The build procedure
-  - don't forget to change the version number is doxygen.conf, header.html, and IA2TypeLibrary.idl
+  - don't forget to change the version number in doxygen.conf, header.html, and IA2TypeLibrary.idl
     note: the type library version number can only be in major.minor format, e.g. not 1.2.1.
-  - don't forget to change the version and date in the errata file 
+  - create a new errata file; don't forget to change the version and date
+  - update header.html and footer.html, e.g. date, version #; also doxygen version #
   - don't forget to create a changelog.txt file
   - start cygwin
   - CD to the directory containing the above files
@@ -28,7 +44,7 @@ How to build the IA2 docs, a merged IDL file, a zip file containing the docs and
   - notepad sh.out (to check for errors)
   - exit cygwin
   - the doxgen generated files, merged idl file, and the zip file will be built
-  - CD to the ia2\IDL-Test directory
+  - move to the IDL-Test directory
   - activate the sln file
   - There are two projects, one for the individual idl files, one for the merged idl file
   - Build, Batch Build, Choose the non-merged IDL project

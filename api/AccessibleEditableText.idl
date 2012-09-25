@@ -4,7 +4,7 @@
  * 
  *  IAccessible2 IDL Specification 
  * 
- *  Copyright (c) 2007, 2010 Linux Foundation 
+ *  Copyright (c) 2007, 2012 Linux Foundation 
  *  Copyright (c) 2006 IBM Corporation 
  *  Copyright (c) 2000, 2006 Sun Microsystems, Inc. 
  *  All rights reserved. 
@@ -96,6 +96,7 @@ interface IAccessibleEditableText : IUnknown
     "Special Offsets for use in the IAccessibleText and IAccessibleEditableText Methods" 
     for information about special offsets that can be used in %IAccessibleEditableText
     methods.
+   @deprecated This function is available via the application's GUI.
   */
   HRESULT copyText
     (
@@ -167,6 +168,7 @@ interface IAccessibleEditableText : IUnknown
     "Special Offsets for use in the IAccessibleText and IAccessibleEditableText Methods" 
     for information about special offsets that can be used in %IAccessibleEditableText
     methods.
+   @deprecated This function is available via the application's GUI.
   */
   HRESULT cutText
     (
@@ -192,6 +194,7 @@ interface IAccessibleEditableText : IUnknown
     methods.
    @retval S_OK
    @retval E_INVALIDARG if bad [in] passed
+   @deprecated This function is available via the application's GUI.
   */
   HRESULT pasteText
     (
