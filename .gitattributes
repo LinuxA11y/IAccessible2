@@ -1,0 +1,12 @@
+.gitattributes text
+*.idl text
+*.txt text
+*.html text
+*.css text
+*.conf text
+*.sh eol=lf
+*.h text
+*.vcproj eol=crlf
+*.sln eol=crlf
+*.def eol=crlf
+*.rc eol=crlf
