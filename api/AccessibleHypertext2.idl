@@ -4,7 +4,7 @@
  * 
  *  IAccessible2 IDL Specification 
  * 
- *  Copyright (c) 2007, 2012 Linux Foundation 
+ *  Copyright (c) 2007, 2013 Linux Foundation 
  *  Copyright (c) 2006 IBM Corporation 
  *  Copyright (c) 2000, 2006 Sun Microsystems, Inc. 
  *  All rights reserved. 
@@ -59,10 +59,8 @@ import "AccessibleHyperlink.idl";
 
 /** @brief This interface exposes information about hypertext in a document.
 
- The %IAccessibleHypertext interface is the main interface to expose
-  hyperlinks in a document, typically a text document, that are used 
-  to reference other documents.  A typical implementation is to implement 
-  this interface on the smallest text object such as a paragraph of text.
+ The %IAccessibleHypertext2 interface extends the functinality of the
+ %IAccessibleHypertext inteface.
 */
 [object, uuid(CF64D89F-8287-4B44-8501-A827453A6077)]
 interface IAccessibleHypertext2 : IAccessibleHypertext
@@ -74,7 +72,7 @@ interface IAccessibleHypertext2 : IAccessibleHypertext
     provides several kinds of information describing it.
 
    @param [out] hyperlinks
-    This array is allocated by the server.  Free it with CoTaskMemFree.
+    This array is allocated by the server.  The client must free it with CoTaskMemFree.
    @param [out] nHyperlinks
     The number of links returned; the size of the returned array.
    @retval S_OK

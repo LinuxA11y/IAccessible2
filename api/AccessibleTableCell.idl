@@ -81,7 +81,7 @@ interface IAccessibleTableCell : IUnknown
 
    @param [out] cellAccessibles
     Pointer to an array of references to cell accessibles.  The array is allocated
-	by the server.  Free it with CoTaskMemFree.
+	by the server.  The client must free it with CoTaskMemFree.
    @param [out] nColumnHeaderCells
     The number of accessibles returned; the size of the returned array.
    @retval S_OK
@@ -120,7 +120,7 @@ interface IAccessibleTableCell : IUnknown
 
    @param [out] cellAccessibles
     Pointer to an array of references to cell accessibles.  The array is allocated
-	by the server.  Free it with CoTaskMemFree.
+	by the server.  The client must free it with CoTaskMemFree.
    @param [out] nRowHeaderCells
     The number of accessibles returned; the size of the returned array.
    @retval S_OK

@@ -4,7 +4,7 @@
  * 
  *  IAccessible2 IDL Specification 
  * 
- *  Copyright (c) 2007, 2012 Linux Foundation 
+ *  Copyright (c) 2007, 2013 Linux Foundation 
  *  Copyright (c) 2006 IBM Corporation 
  *  Copyright (c) 2000, 2006 Sun Microsystems, Inc. 
  *  All rights reserved. 
@@ -61,6 +61,20 @@ import "oleacc.idl";
 */ 
 ///@{
 
+/** The target object is the containing application object. */
+const WCHAR *const IA2_RELATION_CONTAINING_APPLICATION = L"containingApplication";
+
+/** The target object is the containing document object. The target object implements
+ the IAccessibleDocument interface.
+*/
+const WCHAR *const IA2_RELATION_CONTAINING_DOCUMENT = L"containingDocument";
+
+/** The target object is the containing tab pane object. */
+const WCHAR *const IA2_RELATION_CONTAINING_TAB_PANE = L"containingTabPane";
+
+/** The target object is the containing window object. */
+const WCHAR *const IA2_RELATION_CONTAINING_WINDOW = L"containingWindow";
+
 /** Some attribute of this object is affected by a target object. */
 const WCHAR *const IA2_RELATION_CONTROLLED_BY = L"controlledBy";
 
@@ -92,9 +106,6 @@ const WCHAR *const IA2_RELATION_FLOWS_FROM = L"flowsFrom";
 /** Content flows from this object to a target object. */
 const WCHAR *const IA2_RELATION_FLOWS_TO = L"flowsTo";
 
-/** This object is a grouping object for the target object. */
-const WCHAR *const IA2_RELATION_GROUPING_OBJECT_FOR = L"groupingObjectFor";
-
 /** This object is label for a target object. */
 const WCHAR *const IA2_RELATION_LABEL_FOR = L"labelFor";
 
@@ -117,10 +128,16 @@ const WCHAR *const IA2_RELATION_MEMBER_OF = L"memberOf";
 /** The target object is the next object in the tab order. */
 const WCHAR *const IA2_RELATION_NEXT_TABBABLE = L"nextTabbable";
 
-/** This object is a child of a target object. */
+/** This object is a logical child of a target object.  This relation is the reciprocal
+ of the IA2_RELATION_NODE_PARENT_OF relation. In some cases an application's accessible
+ tree is such that objects can be in a logical parent-child relationship which is
+ different from the hierarchy of the accessible tree. */
 const WCHAR *const IA2_RELATION_NODE_CHILD_OF = L"nodeChildOf";
 
-/** This object is a parent of a target object. */
+/** This object is a logical parent of a target object. This relation is the reciprocal
+ of the IA2_RELATION_NODE_CHILD_OF relation. In some cases an application's accessible
+ tree is such that objects can be in a logical parent-child relationship which is
+ different from the hierarchy of the accessible tree. */
 const WCHAR *const IA2_RELATION_NODE_PARENT_OF = L"nodeParentOf";
 
 /** This object is a parent window of the target object. */
@@ -131,30 +148,20 @@ const WCHAR *const IA2_RELATION_PARENT_WINDOW_OF = L"parentWindowOf";
 */
 const WCHAR *const IA2_RELATION_POPUP_FOR = L"popupFor";
 
-/** This object is the initiator for the target popup object. */
-const WCHAR *const IA2_RELATION_POPUP_INITIATOR_FOR = L"popInitiatorFor";
-
 /** The target object is the previous object in the tab order. */
 const WCHAR *const IA2_RELATION_PREVIOUS_TABBABLE = L"previousTabbable";
 
 /** This object is a sub window of a target object. */
 const WCHAR *const IA2_RELATION_SUBWINDOW_OF = L"subwindowOf";
 
-/** The target object is the containing document object. */
-const WCHAR *const IA2_RELATION_CONTAINING_DOCUMENT = L"containingDocument";
-
-/** The target object is the containing tab pane object. */
-const WCHAR *const IA2_RELATION_CONTAINING_TAB_PANE = L"containingTabPane";
-
-/** The target object is the containing window object. */
-const WCHAR *const IA2_RELATION_CONTAINING_WINDOW = L"containingWindow";
-
-/** The target object is the containing application object. */
-const WCHAR *const IA2_RELATION_CONTAINING_APPLICATION = L"containingApplication";
-
 ///@}
 
-/// This interface gives access to an object's set of relations.
+/** This interface gives access to an object's set of relations.
+
+ Note that this interface has been deprecated along with IAccessible2::relation,
+ IAccessible2::relations, and IAccessible2::nRelations.  These have been replaced
+ with IAccessible2_2::relationTargetsOfType.
+*/
 [object, uuid(7CDF86EE-C3DA-496a-BDA4-281B336E1FDC)]
 interface IAccessibleRelation : IUnknown
 {

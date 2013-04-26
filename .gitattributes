@@ -6,7 +6,7 @@
 *.conf text
 *.sh eol=lf
 *.h text
-*.vcproj eol=crlf
+*.vcxproj eol=crlf
 *.sln eol=crlf
 *.def eol=crlf
 *.rc eol=crlf

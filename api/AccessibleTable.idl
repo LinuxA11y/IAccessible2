@@ -337,7 +337,7 @@ interface IAccessibleTable : IUnknown
 	"Special Consideration when using Arrays" for more details.
    @param [out] children
     An array of cell indexes of selected cells (each index is 0 based), 
-	allocated by the server. Free it with CoTaskMemFree.
+	allocated by the server. The client must free it with CoTaskMemFree.
    @param [out] nChildren
     The number of cell indexes returned; the size of the returned array.
    @retval S_OK
@@ -356,7 +356,7 @@ interface IAccessibleTable : IUnknown
 	"Special Consideration when using Arrays" for more details.
    @param [out] columns
 	An array of column indexes of selected columns (each index is 0 based), allocated
-	by the server. Free it with CoTaskMemFree.
+	by the server. The client must free it with CoTaskMemFree.
    @param [out] nColumns
     The number of column indexes returned; the size of the returned array.
    @retval S_OK
@@ -375,7 +375,7 @@ interface IAccessibleTable : IUnknown
 	"Special Consideration when using Arrays" for more details.
    @param [out] rows
     An array of row indexes of selected rows (each index is 0 based), allocated
-	by the server. Free it with CoTaskMemFree.
+	by the server. The client must free it with CoTaskMemFree.
    @param [out] nRows
     The number of row indexes returned; the size of the returned array.
    @retval S_OK

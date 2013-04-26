@@ -1,4 +1,4 @@
-2012-September-17 Pete Brunet <pete@a11ysoft.com>
+2013-March-15 Pete Brunet <pete@a11ysoft.com>
 
 	Changes from 1.2.1 to 1.3
 
@@ -6,39 +6,43 @@
 	- Change version from 1.2.1 to 1.3.
 
 	* api\Accessible2.idl
-	- Deprecate the nRelation, relation, relations methods.
+	- Add reference to the new IA2Actions enum.
+	- Mark IAccessibleTable as being deprecated.
 	- Update the documentation on the extaneous [in] parameters of
 	  IAccessible2's maxExtendedStates and maxLocalizedExtendedStates methods,
 	  and IAccessibleAction's keyBinding method.
+	- Update the copyright date.
 
 	* api\Accessible2_2.idl
-	- This is a new interface; it subclasses and extends IAccessible2.
-	- It adds the attribute, accessibleWithCaret, relationTargetsOfType methods.
+	- This is a new interface.
+	- It subclasses IAccessible2.
+	- It adds the attribute, accessibleWithCaret, and relationTargetsOfType methods.
+
+	* api\AccessibleAction.idl
+	- Add IA2Actions enum
+	- Update the copyright date.
 
 	* api\AccessibleDocument
-	- This is a new interface.
+	- This is a new interface containing the anchorTarget method.
 
 	* api\AccessibleEditableText.idl
 	- Document that copyText, cutText, and pasteText are deprecated.
 	- Update the copyright date.
 
 	* api\AccessibleHypertext2.idl
-	- This is a new interface; it subclasses and extends IAccessibleHypertext.
-	- Add hyperlinks method.
-	- Add import for AccessibleHypertext.idl.
+	- This is a new interface.
+	- It subclasses IAccessibleHypertext and adds the hyperlinks method.
 
 	* api\AccessibleRelation.idl
 	- Update the copyright date.
 	- Add new relations:
-	    IA2_RELATION_GROUPING_OBJECT_FOR
-	    IA2_RELATION_NEXT_TABBABLE
-	    IA2_RELATION_NODE_PARENT_OF
-	    IA2_RELATION_POPUP_INITIATOR_FOR
-	    IA2_RELATION_PREVIOUS_TABBABLE
-	    IA2_RELATION_CONTAINING_DOCUMENT
+	    IA2_RELATION_CONTAINING_APPLICATION
+            IA2_RELATION_CONTAINING_DOCUMENT
 	    IA2_RELATION_CONTAINING_TAB_PANE
 	    IA2_RELATION_CONTAINING_WINDOW
-	    IA2_RELATION_CONTAINING_APPLICATION
+	    IA2_RELATION_NEXT_TABBABLE
+	    IA2_RELATION_NODE_PARENT_OF
+	    IA2_RELATION_PREVIOUS_TABBABLE
 
 	* api\AccessibleTable2.idl
 	- Update the copyright date.
@@ -54,8 +58,8 @@
 	- Fix documentation of the offset parameter of textAtOffset.
 
 	* api\AccessibleText2.idl
-	- This is a new interface; it subclasses and extends IAccessibleText.
-	- Add attributeRange method.
+	- This is a new interface.
+	- It subclasses IAccessibleText and adds the attributeRange method.
 
 	* api\IA2TypeLibrary.idl
 	- Update the copyright date.

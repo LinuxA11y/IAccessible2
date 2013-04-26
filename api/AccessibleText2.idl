@@ -4,7 +4,7 @@
  * 
  *  IAccessible2 IDL Specification 
  * 
- *  Copyright (c) 2007, 2012 Linux Foundation 
+ *  Copyright (c) 2007, 2013 Linux Foundation 
  *  Copyright (c) 2006 IBM Corporation 
  *  Copyright (c) 2000, 2006 Sun Microsystems, Inc. 
  *  All rights reserved. 
@@ -59,30 +59,8 @@ import "AccessibleText.idl";
 
 /** @brief This interface gives read-only access to text.
 
- The %IAccessibleText interface should be implemented by all components 
-  that present textual information on the display like  buttons, 
-  text entry fields, or text portions of the document window.  The interface 
-  provides access to the text's content, attributes, and spatial location.  
-  However, text can not be modified with this interface.  That is the task 
-  of the IAccessibleEditableText interface.
-        
- The text length, i.e. the number of characters in the text, is
-  returned by IAccessibleText::nCharacters. All methods that operate 
-  on particular characters (e.g. IAccessibleText::textAtOffset) use character 
-  indices from 0 to length-1. All methods that operate on character positions 
-  (e.g. IAccessibleText::text) use indices from 0 to length.
-
- Please note that accessible text does not necessarily support selection.  
-  In this case it should behave as if there where no selection.  An empty 
-  selection is used for example to express the current cursor position.
-
- Refer to @ref _specialOffsets 
-  "Special Offsets for use in the IAccessibleText and IAccessibleEditableText Methods" 
-  for information about special offsets that can be used in %IAccessibleText methods.
-
- E_FAIL is returned in the following cases
- @li endOffset < startOffset
- @li endoffset > length
+ The %IAccessibleText2 interface extends the functionality of the
+ %IAccessibleText interface.
 */
 [object, uuid(9690A9CC-5C80-4DF5-852E-2D5AE4189A54)]
 interface IAccessibleText2 : IAccessibleText

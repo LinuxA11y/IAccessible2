@@ -4,7 +4,7 @@
  *
  *  IAccessible2 IDL Specification 
  * 
- *  Copyright (c) 2007, 2010 Linux Foundation 
+ *  Copyright (c) 2007, 2012 Linux Foundation 
  *  Copyright (c) 2006 IBM Corporation 
  *  Copyright (c) 2000, 2006 Sun Microsystems, Inc. 
  *  All rights reserved. 
@@ -54,6 +54,31 @@
 import "objidl.idl";
 import "oaidl.idl";
 import "oleacc.idl";
+        
+/** This enum defines values which are predefined actions for use when implementing
+ support for media.
+
+ This enum is used when specifying an action for IAccessibleAction::doAction.
+*/
+
+enum IA2Actions {
+  IA2_ACTION_OPEN = -1,         /**< Used to inform the server that the client will
+                                signal via IA2_ACTION_COMPLETE when it has consumed
+                                the content provided by the object.  This action
+                                allows the object's server to wait for all clients
+                                to signal their readiness for additional content.
+                                Any form of content generation that requires
+                                synchronization with an AT would require use of this
+                                action.  One example is the generation of text describing
+                                visual content not obvious from a video's sound track.
+                                In this scenario the Text to Speech or Braille output
+                                may take more time than the related length of silence
+                                in the video's sound track. */
+  IA2_ACTION_COMPLETE = -2,  	/**< Used by the client to inform the server that it has
+                                consumed the most recent content provided by this object. */
+  IA2_ACTION_CLOSE = -3         /**< Used to inform the server that the client no longer
+                                requires synchronization. */
+};
         
 /** @brief This interface gives access to actions that can be executed
   for accessible objects.
@@ -148,7 +173,7 @@ interface IAccessibleAction : IUnknown
 	"Special Consideration when using Arrays" for more details.
    @param [out] keyBindings
     An array of BSTRs, allocated by the server, one for each key binding.
-	Free it with CoTaskMemFree.
+	The client must free it with CoTaskMemFree.
    @param [out] nBindings
     The number of key bindings returned; the size of the returned array.
    @retval S_OK

@@ -4,7 +4,7 @@
  * 
  *  IAccessible2 IDL Specification 
  * 
- *  Copyright (c) 2012 Linux Foundation 
+ *  Copyright (c) 2013 Linux Foundation 
  *  All rights reserved. 
  *   
  *   
@@ -60,10 +60,11 @@ import "oleacc.idl";
 [object, uuid(C48C7FCF-4AB5-4056-AFA6-902D6E1D1149)]
 interface IAccessibleDocument : IUnknown
 {
-  /** @brief Returns the most recently used anchor target within an HTML document.
+  /** @brief Returns the most recently used anchor target within a document.
   
-   Anchor targets are those which has been defined with the <a> tag.  An HTML page's
-    most recently targeted in-page anchor is returned.
+   A document's most recently targeted in-page anchor is returned.  A typical use
+    of this method is to fetch the anchor target within an HTML document.  In this
+    case anchor targets are those which has been defined with the <a> tag.  
 
    @param [out] accessible
    @retval S_OK

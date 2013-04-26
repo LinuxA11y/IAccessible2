@@ -4,7 +4,7 @@
  * 
  *  IAccessible2 IDL Specification 
  * 
- *  Copyright (c) 2007, 2012 Linux Foundation 
+ *  Copyright (c) 2007, 2013 Linux Foundation 
  *  Copyright (c) 2006 IBM Corporation 
  *  Copyright (c) 2000, 2006 Sun Microsystems, Inc. 
  *  All rights reserved. 
@@ -86,7 +86,7 @@ interface IAccessible2_2 : IAccessible2
      [out, retval] VARIANT *attribute
     );
 
-  /** @brief Returns the hypertext accessible in the subtree of this object, and the caret offset within it.
+  /** @brief Returns the deepest hypertext accessible in the subtree of this object, and the caret offset within it.
    @param [out] accessible
    @param [out] caretOffset
    @retval S_OK
@@ -100,11 +100,11 @@ interface IAccessible2_2 : IAccessible2
 
   /** @brief Returns relation targets for a specified target type.
    @param [in] type
-    The requested relation type.
+    The requested @ref grpRelations "relation type".
    @param [in] maxTargets
     The number of targets requested.  0 indicates that all targets should be returned.
    @param [out] targets
-    This array is allocated by the server.  Free it with CoTaskMemFree.
+    This array is allocated by the server.  The client must free it with CoTaskMemFree.
    @param [out] nTargets
     The number of targets returned; the size of the returned array.
    @retval S_OK
