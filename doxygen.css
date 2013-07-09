@@ -223,10 +223,10 @@ span.lineno a:hover {
 }
 
 div.ah {
-	background-color: black; 
-	font-weight: bold; 
-	color: #ffffff; 
-	margin-bottom: 3px; 
+	background-color: black;
+	font-weight: bold;
+	color: #ffffff;
+	margin-bottom: 3px;
 	margin-top: 3px;
 	padding: 0.2em;
 	border: solid thin #333;
@@ -247,8 +247,8 @@ div.groupHeader {
 }
 
 div.groupText {
-	margin-left: 16px; 
-	font-style: italic; 
+	margin-left: 16px;
+	font-style: italic;
 }
 
 body {
@@ -285,7 +285,7 @@ tr.memlist {
 }
 
 p.formulaDsp {
-	text-align: center; 
+	text-align: center;
 }
 
 img.formulaDsp {
@@ -293,7 +293,7 @@ img.formulaDsp {
 }
 
 img.formulaInl {
-	vertical-align: middle; 
+	vertical-align: middle;
 }
 
 div.center {
@@ -373,7 +373,7 @@ blockquote {
 /* @end */
 
 /*
-.search { 
+.search {
 	color: #003399;
 	font-weight: bold;
 }
@@ -395,7 +395,7 @@ td.tiny {
 	font-size: 75%;
 }
 
-.dirtab { 
+.dirtab {
 	padding: 4px;
 	border-collapse: collapse;
 	border: 1px solid #A3B4D7;
@@ -487,9 +487,9 @@ table.memberdecls {
 	color: #4665A2;
 	font-weight: normal;
 	margin-left: 9px;
-} 
+}
 
-.memnav { 
+.memnav {
 	background-color: #EBEFF6;
 	border: 1px solid #A3B4D7;
 	text-align: center;
@@ -609,7 +609,7 @@ dl.reflist dd {
 .params, .retval, .exception, .tparams {
         margin-left: 0px;
         padding-left: 0px;
-}
+}       
 
 .params .paramname, .retval .paramname {
         font-weight: bold;
@@ -619,8 +619,8 @@ dl.reflist dd {
 .params .paramtype {
         font-style: italic;
         vertical-align: top;
-}
-
+}       
+        
 .params .paramdir {
         font-family: "courier new",courier,monospace;
         vertical-align: top;
@@ -638,7 +638,7 @@ td.mlabels-left {
 td.mlabels-right {
 	vertical-align: bottom;
 	padding: 0px;
-	white-space: nowrap; 
+	white-space: nowrap;
 }
 
 span.mlabels {
@@ -710,8 +710,8 @@ div.directory {
 	background-color: #F7F8FB;
 }
 
-.directory img { 
-	vertical-align: -30%; 
+.directory img {
+	vertical-align: -30%;
 }
 
 .directory .levels {
@@ -901,7 +901,7 @@ div.summary
 	padding-right: 5px;
 	width: 50%;
 	text-align: right;
-}
+}       
 
 div.summary a
 {
@@ -1022,7 +1022,7 @@ dl.section dd {
 #projectname
 {
 	font: 300% Tahoma, Arial,sans-serif;
-	margin: 0px; 
+	margin: 0px;
 	padding: 2px 0px;
 }
     
@@ -1036,14 +1036,14 @@ dl.section dd {
 #projectnumber
 {
 	font: 50% Tahoma, Arial,sans-serif;
-	margin: 0px; 
+	margin: 0px;
 	padding: 0px;
 }
 
 #titlearea
 {
 	padding: 0px;
-	margin: 0px; 
+	margin: 0px;
 	width: 100%;
 	border-bottom: 1px solid #5373B4;
 }
@@ -1120,7 +1120,7 @@ div.toc ul {
         list-style: none outside none;
         border: medium none;
         padding: 0px;
-}
+}       
 
 div.toc li.level1 {
         margin-left: 0px;

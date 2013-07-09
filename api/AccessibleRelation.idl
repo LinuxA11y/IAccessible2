@@ -157,10 +157,6 @@ const WCHAR *const IA2_RELATION_SUBWINDOW_OF = L"subwindowOf";
 ///@}
 
 /** This interface gives access to an object's set of relations.
-
- Note that this interface has been deprecated along with IAccessible2::relation,
- IAccessible2::relations, and IAccessible2::nRelations.  These have been replaced
- with IAccessible2_2::relationTargetsOfType.
 */
 [object, uuid(7CDF86EE-C3DA-496a-BDA4-281B336E1FDC)]
 interface IAccessibleRelation : IUnknown

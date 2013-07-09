@@ -65,7 +65,7 @@
   IAccessibleHypertext2\n
   IAccessibleHyperlink\n
   IAccessibleImage\n
-  IAccessibleRelation [Deprecated]\n
+  IAccessibleRelation\n
   IAccessibleTable [Deprecated]\n
   IAccessibleTable2\n
   IAccessibleTableCell\n
@@ -99,7 +99,7 @@
  @page _licensePage BSD License
   %IAccessible2 IDL Specification
 
-  Copyright (c) 2007, 2010 Linux Foundation\n
+  Copyright (c) 2007, 2013 Linux Foundation\n
   Copyright (c) 2006 IBM Corporation\n
   Copyright (c) 2000, 2006 Sun Microsystems, Inc.\n
   All rights reserved.
@@ -162,9 +162,9 @@
  @ref _trademark
 
  @section _errors Error Handling
-  HRESULT values are defined by the Microsoft&reg; Win32&reg; API.  For more information, refer to 
-  <a href="http://msdn2.microsoft.com/en-us/library/bb401631.aspx">Interpreting HRESULT Values</a>
-  in MSDN&reg;.
+  HRESULT values are defined by the Microsoft&reg; Win32&reg; API.  For more information, refer to
+  <a href="http://msdn.microsoft.com/en-us/library/windows/desktop/aa378137%28v=vs.85%29.aspx">
+  Interpreting HRESULT Values</a> in MSDN&reg;.
 
   Note that the S_FALSE return value is considered a non-error value and the 
   SUCCEEDED macro will return TRUE.  S_FALSE is used when there is no failure
@@ -206,7 +206,7 @@
 
   For the remaining methods which return arrays, the server must allocate the array
   and the client must free the array when no longer needed.  These methods are
-  IAccessible2::extendedStates, IAccessible2::localizedExtendedStates, 
+  IAccessible2::extendedStates, IAccessible2::localizedExtendedStates,
   IAccessible2_2::relationTargetsOfType, IAccessibleAction::keyBinding, 
   IAccessibleHypertext2::hyperlinks, IAccessibleTable::selectedChildren, 
   IAccessibleTable::selectedColumns, IAccessibleTable::selectedRows,
@@ -275,8 +275,8 @@
 
   QueryService must be used to switch from a reference to an MSAA IAccessible interface 
   to another interface.  This has been 
-  <a href="http://www.accessinteropalliance.org/docs/Introducing_IAccessibleEx.doc">
-  documented by Microsoft</a> and the pertinent facts have been extracted below: 
+  <a href="http://www.atia.org/files/public/Introducing_IAccessibleEx.doc">
+  documented</a> and the pertinent facts have been extracted below: 
 
   @par 
    Why use QueryService instead of just using QueryInterface to get IAccessibleEx 
@@ -383,7 +383,6 @@ interface IAccessible2 : IAccessible
   /** @brief Returns the number of accessible relations for this object.
    @param [out] nRelations
    @retval S_OK
-   @deprecated use IAccessible2_2::relationTargetsOfType
   */
   [propget] HRESULT nRelations
     (
@@ -396,7 +395,6 @@ interface IAccessible2 : IAccessible
    @param [out] relation
    @retval S_OK
    @retval E_INVALIDARG if bad [in] passed
-   @deprecated use IAccessible2_2::relationTargetsOfType
   */
   [propget] HRESULT relation
     (
@@ -415,7 +413,7 @@ interface IAccessible2 : IAccessible
     actual number of relations in the returned array (not more than maxRelations)
    @retval S_OK
    @retval S_FALSE if there are no relations, nRelations is set to 0
-   @deprecated use IAccessible2_2::relationTargetsOfType
+   @note As a performant alternative, client code should consider using IAccessible2_2::relationTargetsOfType.
   */
   [propget] HRESULT relations
     (

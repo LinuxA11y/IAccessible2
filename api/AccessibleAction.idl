@@ -4,7 +4,7 @@
  *
  *  IAccessible2 IDL Specification 
  * 
- *  Copyright (c) 2007, 2012 Linux Foundation 
+ *  Copyright (c) 2007, 2013 Linux Foundation 
  *  Copyright (c) 2006 IBM Corporation 
  *  Copyright (c) 2000, 2006 Sun Microsystems, Inc. 
  *  All rights reserved. 
@@ -54,7 +54,7 @@
 import "objidl.idl";
 import "oaidl.idl";
 import "oleacc.idl";
-        
+
 /** This enum defines values which are predefined actions for use when implementing
  support for media.
 
@@ -123,7 +123,8 @@ interface IAccessibleAction : IUnknown
     the valid range no action is performed.
    @retval S_OK
    @retval S_FALSE if action could not be performed
-   @retval E_INVALIDARG if bad [in] passed 
+   @retval E_INVALIDARG if bad [in] passed
+   @note If implementing support for media, refer to the predefined constants in the ::IA2Actions enum.
     */
   HRESULT doAction
     (

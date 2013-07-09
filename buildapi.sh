@@ -48,7 +48,7 @@ if [ -f ../ia2_api_all.idl ]; then
 fi
 
 # generate merged IDL file - IA2TypeLibrary.idl must be at the end
-cat IA2CommonTypes.idl AccessibleRelation.idl AccessibleAction.idl AccessibleRole.idl AccessibleStates.idl Accessible2.idl Accessible2_2.idl AccessibleComponent.idl AccessibleValue.idl AccessibleText.idl AccessibleText2.idl AccessibleEditableText.idl AccessibleHyperlink.idl AccessibleHyperText.idl AccessibleHypertext2.idl AccessibleTable2.idl AccessibleTableCell.idl AccessibleImage.idl AccessibleEventId.idl AccessibleApplication.idl AccessibleDocument.idl IA2TypeLibrary.idl | sed -e 's/import "[A-Za-z0-9].*$//g' - | cat api_all_headers.idl - > ../ia2_api_all.idl
+cat Accessible2.idl Accessible2_2.idl AccessibleAction.idl AccessibleApplication.idl AccessibleComponent.idl AccessibleDocument.idl AccessibleEditableText.idl AccessibleEventId.idl AccessibleHyperlink.idl AccessibleHypertext.idl AccessibleHypertext2.idl AccessibleImage.idl AccessibleRelation.idl AccessibleRole.idl AccessibleStates.idl AccessibleTable.idl AccessibleTable2.idl AccessibleTableCell.idl AccessibleText.idl AccessibleText2.idl AccessibleValue.idl IA2CommonTypes.idl IA2TypeLibrary.idl | sed -e 's/import "[A-Za-z0-9].*$//g' - | cat api_all_headers.idl - > ../ia2_api_all.idl
 
 cd ..
 
