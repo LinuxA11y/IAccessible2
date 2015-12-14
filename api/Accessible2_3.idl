@@ -6,10 +6,17 @@ import "Accessible2_2.idl";
 /**
  * This structure represents a directional range of the content. It is defined
  * by two points in the content, where each one is defined by an accessible
- * object and an offset relative to it. A typical case of a range point is a text
- * accessible and text offset within it.
- * One of the range points is an anchor, a start of the range, and another one
- * is a range end, which typically coincides with the user focus.
+ * object and an offset relative to it. A typical case of a range point is
+ * a text accessible and text offset within it.
+ *
+ * The "anchor" is one point of the range and typically remains constant.
+ * The other point is the "active" point, which typically corresponds to
+ * the user's focus or point of interest. The user moves the active point to
+ * expand or collapse the range. In most cases, anchor is the start of the range
+ * and active is the end. However, in case of selection, when selecting
+ * backwards (e.g. pressing shift+left arrow in a text field), the start of
+ * the range is the active point, as the user moves this to manipulate
+ * the selection.
  */
 typedef struct IA2Range {
   IAccessible* anchor;
