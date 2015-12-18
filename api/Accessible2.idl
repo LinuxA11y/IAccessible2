@@ -76,6 +76,7 @@
 
  @section _structs Structs
   IA2Locale\n
+  IA2Range\n
   IA2TableModelChange\n
   IA2TextSegment
 
