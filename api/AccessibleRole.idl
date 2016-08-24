@@ -290,6 +290,12 @@ enum IA2Role {
    to the main content.  If the complementary content is completely separable main
    content, it may be appropriate to use a more general role.
   */
-  IA2_ROLE_COMPLEMENTARY_CONTENT
-  
+  IA2_ROLE_COMPLEMENTARY_CONTENT,
+
+  /** An object representing a navigational landmark, a region on a page to
+   which the user may want quick access, such as a navigation area, a search
+   facility or the main content of a page.
+  */
+  IA2_ROLE_LANDMARK
+
 };
