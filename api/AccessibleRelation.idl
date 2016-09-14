@@ -154,6 +154,18 @@ const WCHAR *const IA2_RELATION_PREVIOUS_TABBABLE = L"previousTabbable";
 /** This object is a sub window of a target object. */
 const WCHAR *const IA2_RELATION_SUBWINDOW_OF = L"subwindowOf";
 
+/** This object is a details for a target object. */
+const WCHAR *const IA2_RELATION_DETAILS = L"details";
+
+/** The target object is a details for this object. */
+const WCHAR *const IA2_RELATION_DETAILS_FOR = L"detailsFor";
+
+/** This object is an error for a target object. */
+const WCHAR *const IA2_RELATION_ERROR = L"error";
+
+/** The target object is an error for this object. */
+const WCHAR *const IA2_RELATION_ERROR_FOR = L"errorFor";
+
 ///@}
 
 /** This interface gives access to an object's set of relations.
