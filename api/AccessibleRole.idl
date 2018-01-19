@@ -296,6 +296,11 @@ enum IA2Role {
    which the user may want quick access, such as a navigation area, a search
    facility or the main content of a page.
   */
-  IA2_ROLE_LANDMARK
+  IA2_ROLE_LANDMARK,
 
+  /**
+   * A bar that serves as a level indicator to, for instance, show
+   * the strength of a password or the charge of a battery.
+   */
+  IA2_ROLE_LEVEL_BAR
 };
