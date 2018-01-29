@@ -298,4 +298,9 @@ enum IA2Role {
   */
   IA2_ROLE_LANDMARK
 
+  /**
+   * A bar that serves as a level indicator to, for instance, show
+   * the strength of a password or the charge of a battery.
+   */
+  IA2_ROLE_LEVEL_BAR
 };
