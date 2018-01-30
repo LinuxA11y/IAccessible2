@@ -296,7 +296,7 @@ enum IA2Role {
    which the user may want quick access, such as a navigation area, a search
    facility or the main content of a page.
   */
-  IA2_ROLE_LANDMARK
+  IA2_ROLE_LANDMARK,
 
   /**
    * A bar that serves as a level indicator to, for instance, show
