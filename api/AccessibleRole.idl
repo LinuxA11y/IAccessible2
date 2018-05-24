@@ -302,5 +302,15 @@ enum IA2Role {
    * A bar that serves as a level indicator to, for instance, show
    * the strength of a password or the charge of a battery.
    */
-  IA2_ROLE_LEVEL_BAR
+  IA2_ROLE_LEVEL_BAR,
+
+  /** Content previously deleted or proposed to be deleted, e.g. in revision
+   history or a content view providing suggestions from reviewers.
+  */
+  IA2_ROLE_CONTENT_DELETION,
+
+  /** Content previously inserted or proposed to be inserted, e.g. in revision
+   history or a content view providing suggestions from reviewers.
+  */
+  IA2_ROLE_CONTENT_INSERTION
 };
