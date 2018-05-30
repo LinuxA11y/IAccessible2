@@ -4,7 +4,7 @@
  *
  *  IAccessible2 IDL Specification
  *
- *  Copyright (c) 2007, 2013 Linux Foundation
+ *  Copyright (c) 2007, 2013, 2018 Linux Foundation
  *  Copyright (c) 2006 IBM Corporation
  *  Copyright (c) 2000, 2006 Sun Microsystems, Inc.
  *  All rights reserved.
@@ -302,5 +302,15 @@ enum IA2Role {
    * A bar that serves as a level indicator to, for instance, show
    * the strength of a password or the charge of a battery.
    */
-  IA2_ROLE_LEVEL_BAR
+  IA2_ROLE_LEVEL_BAR,
+
+  /** Content previously deleted or proposed for deletion, e.g. in revision
+   history or a content view providing suggestions from reviewers.
+  */
+  IA2_ROLE_CONTENT_DELETION,
+
+  /** Content previously inserted or proposed for insertion, e.g. in revision
+   history or a content view providing suggestions from reviewers.
+  */
+  IA2_ROLE_CONTENT_INSERTION
 };
