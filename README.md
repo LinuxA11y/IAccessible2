@@ -1,5 +1,5 @@
 # IAccessible2
-Accessibility services framework for Microsoft Windows environments
+Accessibility services framework for Microsoft Windows environments.
 
 IAccessible2 is an accessibility API which complements Microsoft's earlier work on MSAA.
 This API fills critical accessibility API gaps in the MSAA offering. IAccessible2 was created out of necessity to
