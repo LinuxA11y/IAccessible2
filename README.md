@@ -10,5 +10,5 @@ The additional functionality includes support for rich text, tables, spreadsheet
 large mainstream applications.
 
 # Useful links
-* [[Object attributes](https://wiki.linuxfoundation.org/accessibility/iaccessible2/textattributes)] former references, may be out of date
-* [[Text attributes](https://wiki.linuxfoundation.org/accessibility/iaccessible2/textattributes)] former references, may be out of date
+* [Object attributes](https://wiki.linuxfoundation.org/accessibility/iaccessible2/objectattributes) former references
+* [Text attributes](https://wiki.linuxfoundation.org/accessibility/iaccessible2/textattributes) former references
