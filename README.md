@@ -12,3 +12,6 @@ large mainstream applications.
 # Useful links
 * [Object attributes](https://wiki.linuxfoundation.org/accessibility/iaccessible2/objectattributes) former references
 * [Text attributes](https://wiki.linuxfoundation.org/accessibility/iaccessible2/textattributes) former references
+
+# Build ia2_api_all.idl for your project
+Run ```concatidl.sh```
