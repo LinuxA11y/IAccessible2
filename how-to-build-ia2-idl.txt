@@ -7,10 +7,12 @@ After cygwin install had to
     mkpasswd -l > /etc/passwd
     Note: On a later install on another machine I didn't have to do this
 
-Had to update my doxygen.conf from 1.5.8 to 1.8.2 (to be compatible with the latest version) using 
+Had to update my doxygen.conf from 1.5.8 to 1.8.2 (to be compatible with the latest version) using
   doxygen -s -u doxygen.conf (-s = no comments, -u = update)
   Note: If the config file spec hasn't changed this won't be necessary
 
+If you only need the merged IDL file for your project:
+- Just run concatidl.sh -- there is no need for Doxygen in this case
 
 How to build the IA2 docs, a merged IDL file, a zip file containing the docs and IDL files.
 - The directory tree...
@@ -19,10 +21,10 @@ How to build the IA2 docs, a merged IDL file, a zip file containing the docs and
     - buildapi.sh: the build script (need cygwin bash shell interpreter installed)
     - doxygen.conf: the doxygen config file (tweaked from the doxygen distribution)
     - doxygen.css: the doxygen css file (tweaked from the doxygen distribution)
-    - header.html: contains metadata 
+    - header.html: contains metadata
     - footer.html: contains the footer seen on each page
     - ia2-<version>-errata.html: info about changes and bug reporting
-    - changelog.txt: lists changes made since the last release 
+    - changelog.txt: lists changes made since the last release
     - a merged IDL file with all the IDL concatenated together
     - a zip file containing IDL and doxygen output
     - an api directory which contains the IDL
@@ -59,7 +61,7 @@ How to build the IA2 docs, a merged IDL file, a zip file containing the docs and
     - You will have to point resedit at the windows.h file from a Windows SDK
     - I used the SDK for v7.1A
   - Use Visual Sudio 2012 Express Edition to build the solution.
-  - Put the project files on the web site: 
+  - Put the project files on the web site:
     - IAccessible2Proxy.def
     - IAccessible2Proxy.rc
     - IAccessible2Proxy.sln
@@ -68,4 +70,3 @@ How to build the IA2 docs, a merged IDL file, a zip file containing the docs and
   - Put the generated DLL on the web site:
     - IAccessible2Proxy.dll
 
-  
