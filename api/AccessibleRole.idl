@@ -315,5 +315,41 @@ enum IA2Role {
   IA2_ROLE_CONTENT_INSERTION,
 
   /// A section of content that is quoted from another source.
-  IA2_ROLE_BLOCK_QUOTE
+  IA2_ROLE_BLOCK_QUOTE,
+
+  /** A run of content that is marked or highlighted, such as for reference
+   purposes, or to call it out as having a special purpose that is clear from
+   context. If the mark is used in conjuction with a related content section
+   in the document, then IA2_RELATION_DETAILS should be used to link the
+   related content (and the reverse relation IA2_RELATION_DETAILS_FOR should
+   link back to the IA2_ROLE_MARK object). If the mark has related information
+   in a tooltip, or as hidden text, then accDescription should be used to
+   provide this information.
+  */
+  IA2_ROLE_MARK,
+
+  /** A grouping for content that has changed from a previous verion of the
+   document. Should include as children one or both of:
+   IA2_ROLE_CONTENT_DELETION and IA2_ROLE_CONTENT_INSERTION, in any order,
+   to indicate what the actual change is.
+  */
+  IA2_ROLE_REVISION,
+
+  /** A grouping for content that is called out as a proposed change from the
+   current verion of the document, such as by a reviewer of the content.
+   Should include as children one or both of:
+   IA2_ROLE_CONTENT_DELETION and IA2_ROLE_CONTENT_INSERTION, in any order,
+   to indicate what the actual change is.
+   If the suggestion is accepted by a document owner, the implementation
+   should change the role to the similar IA2_ROLE_REVISION role.
+  */
+  IA2_ROLE_SUGGESTION,
+
+  /** One or more comments grouped together. If the commentary relates to a
+   specific subtree of content within the same document, then the
+   IA2_RELATION_DETAILS_FOR relation should point from the IA2_ROLE_COMMENTARY
+   object to the related subtree, and that subtree should set the reverse
+   IA2_RELATION_DETAILS relation.
+  */
+  IA2_ROLE_COMMENTARY
 };
