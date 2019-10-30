@@ -345,11 +345,17 @@ enum IA2Role {
   */
   IA2_ROLE_SUGGESTION,
 
-  /** One or more comments grouped together. If the commentary relates to a
+  /** One or more comments grouped together. If the comment section relates to a
    specific subtree of content within the same document, then the
-   IA2_RELATION_DETAILS_FOR relation should point from the IA2_ROLE_COMMENTARY
+   IA2_RELATION_DETAILS_FOR relation should point from the IA2_ROLE_COMMENT_SECTION
    object to the related subtree, and that subtree should set the reverse
    IA2_RELATION_DETAILS relation.
   */
-  IA2_ROLE_COMMENTARY
+  IA2_ROLE_COMMENT_SECTION,
+
+  /** A single comment, possibly within an IA2_ROLE_COMMENT_SECTION object.
+   Supports the groupPosition() method.
+  */
+  IA2_ROLE_COMMENT
+  
 };
