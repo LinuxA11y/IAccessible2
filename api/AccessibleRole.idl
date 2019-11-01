@@ -328,7 +328,7 @@ enum IA2Role {
   */
   IA2_ROLE_MARK,
 
-  /** A grouping for content that has changed from a previous verion of the
+  /** A grouping for content that has changed from a previous version of the
    document. Should include as children one or both of:
    IA2_ROLE_CONTENT_DELETION and IA2_ROLE_CONTENT_INSERTION, in any order,
    to indicate what the actual change is.
@@ -336,7 +336,7 @@ enum IA2Role {
   IA2_ROLE_REVISION,
 
   /** A grouping for content that is called out as a proposed change from the
-   current verion of the document, such as by a reviewer of the content.
+   current version of the document, such as by a reviewer of the content.
    Should include as children one or both of:
    IA2_ROLE_CONTENT_DELETION and IA2_ROLE_CONTENT_INSERTION, in any order,
    to indicate what the actual change is.
