@@ -333,8 +333,8 @@ enum IA2Role {
    Should include as children one or both of:
    IA2_ROLE_CONTENT_DELETION and IA2_ROLE_CONTENT_INSERTION, in any order,
    to indicate what the actual change is.
-   If the suggestion is accepted by a document owner, the implementation
-   should change the role to IA2_ROLE_SECTION.
+   If the suggestion is accepted, the implementation should change the role to
+   a generic one such as IA2_ROLE_SECTION or IA2_ROLE_TEXT_FRAME.
   */
   IA2_ROLE_SUGGESTION,
 
