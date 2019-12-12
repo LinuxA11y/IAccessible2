@@ -334,7 +334,7 @@ enum IA2Role {
    IA2_ROLE_CONTENT_DELETION and IA2_ROLE_CONTENT_INSERTION, in any order,
    to indicate what the actual change is.
    If the suggestion is accepted by a document owner, the implementation
-   should change the role to the similar IA2_ROLE_REVISION role.
+   should change the role to IA2_ROLE_SECTION.
   */
   IA2_ROLE_SUGGESTION,
 
