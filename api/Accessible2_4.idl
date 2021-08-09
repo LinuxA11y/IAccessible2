@@ -1,0 +1,33 @@
+import "objidl.idl";
+import "oaidl.idl";
+import "oleacc.idl";
+import "Accessible2_3.idl";
+
+/**
+ * @brief This interface is an extension of IAccessible2_3 which exposes a
+ * single method for setting the current selection given a number of selection
+ * ranges.
+ *
+ * This interface is preliminary as it has not been adopted by any standard yet.
+*/
+[object, uuid(610a7bec-91bb-444d-a336-a0daf13c4c29)]
+interface IAccessible2_4 : IAccessible2_3
+{
+  /**
+   * @brief Sets the current selection to the provided ranges. The provided
+   * ranges don't need to be contained within this accessible.
+   * @param [in] nRanges
+   *     The length of the array containing the selection ranges.
+   * @param [in] ranges
+   *     The array of selection ranges, allocated by the client with
+   *     CoTaskMemAlloc and freed by the client with CoTaskMemFree.
+   * @retval S_OK Returned if the selection was made successfully.
+   * @retval S_FALSE Returned if the selection could not be made.
+   * @retval E_INVALIDARG Returned if any of the input arguments are invalid.
+   */
+  HRESULT setSelectionRanges
+  (
+      [in] long nRanges,
+      [in, size_is(nRanges)] IA2Range* ranges
+      );
+}
