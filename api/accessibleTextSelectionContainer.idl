@@ -1,0 +1,81 @@
+import "objidl.idl";
+import "oaidl.idl";
+import "oleacc.idl";
+import "AccessibleText.idl";
+
+/**
+ * This structure represents a single  text selection within a document. It is defined
+ * by two points in the content, where each one is defined by an accessible
+ * object supporting the IAccessibleTextInterface
+ * and a character offset relative to it.
+ *
+ * These objects may represent text leaf nodes,
+ * or nodes that may embed further rich content, 
+ * which in this case the object would also support the IAccessibleHypertext interface.
+ *
+ * The end object must appear after the start object in the accessibility tree,
+ * E.g. the end object can be reached from the start object by navigating forward (next, first child etc).
+ *
+ * This struct also contains a `startIsActive` boolean,
+ * to communicate if the start of the selection is the active point or not. 
+ * 
+ * The active point corresponds to the user's focus or point of interest. The user moves the active point to
+ * expand or collapse the range.
+ * The anchor point is  the other point of the range and typically remains constant.
+ * In most cases, anchor is the start of the range
+ * and active is the end. However, in case of selection, when selecting
+ * backwards (e.g. pressing shift+left arrow in a text field), the start of
+ * the range is the active point, as the user moves this to manipulate
+ * the selection.
+ */
+typedef struct IA2TextSelection {
+  IAccessibleText* startObj;
+  long startOffset;
+  IAccessibleText* endObj;
+  long endOffset;
+  bool startIsActive;
+} IA2TextSelection;
+
+/**
+ * @brief an interface to get and set text selections in a document.
+ * this interface should be supported on an object such as a document or content container
+ * that allows selecting acrosss its descendants.
+ */
+[object, uuid(5BE18059-762E-4E73-9476-ABA294FED411)]
+interface IAccessibleTextSelectionContainer : IUnknown
+{
+  /**
+   * @brief Returns an array of selections within the document. 
+   * @param [out] selections
+     The array of selections, allocated by the server. The client must
+     free it with CoTaskMemFree.
+   * @param [out] nSelections
+     the array length
+   * @retval S_OK
+   * @retval S_FALSE returned if there are no selections within the document
+  */
+  [propget] HRESULT selections
+    (
+      [out, size_is(,*nSelections)] IA2TextSelection **selections,
+      [out, retval] long *nSelections
+    );
+
+  /**
+   * @brief makes 1 or more selections in the document
+   denoted by the given array of IA2TextSelections.
+   Any existing selection is relaced by the new selections.
+   * @param [in] nSelections
+   *     The length of the array containing the selection ranges.
+   * @param [in] selections
+   *     The array of selection ranges.
+   * @retval S_OK Returned if the selections were made successfully.
+   * @retval S_FALSE Returned if the selections could not be made.
+   * @retval E_INVALIDARG Returned if any of the input arguments are invalid.
+   */
+  HRESULT setSelections
+  (
+      [in] long nSelections,
+      [in, size_is(nSelections)] IA2TextSelection* selections
+      );
+
+}
