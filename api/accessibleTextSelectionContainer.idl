@@ -41,7 +41,7 @@ typedef struct IA2TextSelection {
  * this interface should be supported on an object such as a document or content container
  * that allows selecting acrosss its descendants.
  */
-[object, uuid(5BE18059-762E-4E73-9476-ABA294FED411)]
+[object, uuid(2118B599-733F-43D0-A569-0B31D125ED9A)]
 interface IAccessibleTextSelectionContainer : IUnknown
 {
   /**
