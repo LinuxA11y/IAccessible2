@@ -4,8 +4,9 @@ import "oleacc.idl";
 import "AccessibleText.idl";
 
 /**
- * This structure represents a single  text selection within a document. It is defined
- * by two points in the content, where each one is defined by an accessible
+ * This structure represents a single  text selection within an accessibility subtree.
+ * This could be within a document, or the subtree of a document.
+ * This selection is defined by two points in the content, where each one is defined by an accessible
  * object supporting the IAccessibleTextInterface
  * and a character offset relative to it.
  *
@@ -38,21 +39,30 @@ typedef struct IA2TextSelection {
 
 /**
  * @brief an interface to get and set text selections in a document.
- * this interface should be supported on an object such as a document or content container
- * that allows selecting acrosss its descendants.
- */
+ * this interface can be supported on any object
+ * that also supports
+ * the IAccessibleText and or IAccessibleHypertext interfaces.
+ * This could be a document, any subtree of a document,
+ * or a text input control.
+*/
 [object, uuid(2118B599-733F-43D0-A569-0B31D125ED9A)]
 interface IAccessibleTextSelectionContainer : IUnknown
 {
   /**
-   * @brief Returns an array of selections within the document. 
+   * @brief Returns an array of selections within this subtree.
    * @param [out] selections
      The array of selections, allocated by the server. The client must
      free it with CoTaskMemFree.
+     The selections returned will be cropped to fit entirely within this subtree,
+     I.e. only reference descendant objects,
+     even if the physical selection may reach outside of this subtree.
+     In the case where the physical selection is entirely outside the subtree,
+     an empty array will be returned.
    * @param [out] nSelections
      the array length
    * @retval S_OK
-   * @retval S_FALSE returned if there are no selections within the document
+   * @retval S_FALSE returned if there are no selections within this subtree,
+   or the physical selection is entirely outside of this subtree.
   */
   [propget] HRESULT selections
     (
@@ -61,16 +71,19 @@ interface IAccessibleTextSelectionContainer : IUnknown
     );
 
   /**
-   * @brief makes 1 or more selections in the document
+   * @brief makes 1 or more selections within this subtree 
    denoted by the given array of IA2TextSelections.
-   Any existing selection is relaced by the new selections.
+   Any existing physical selection (inside or outside this subtree) is replaced by the new selections.
+   All objects within the given selection ranges must be descendants of this subtree,
+   otherwise E_INVALIDARG will be returned.
    * @param [in] nSelections
    *     The length of the array containing the selection ranges.
    * @param [in] selections
    *     The array of selection ranges.
    * @retval S_OK Returned if the selections were made successfully.
    * @retval S_FALSE Returned if the selections could not be made.
-   * @retval E_INVALIDARG Returned if any of the input arguments are invalid.
+   * @retval E_INVALIDARG Returned if any of the input arguments are invalid,
+   or any of the objects in the given ranges are outside of this subtree.
    */
   HRESULT setSelections
   (
