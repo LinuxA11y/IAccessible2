@@ -64,11 +64,11 @@ import "AccessibleText.idl";
  * and a character offset relative to it.
  *
  * These objects may represent text leaf nodes,
- * or nodes that may embed further rich content, 
- * which in this case the object would also support the IAccessibleHypertext interface.
+ * or nodes that may embed further rich content.
+ * In the latter case, the object would also support the IAccessibleHypertext interface.
  *
  * The end object must appear after the start object in the accessibility tree,
- * E.g. the end object can be reached from the start object by navigating forward (next, first child etc).
+ * i.e. the end object must be reachable from the start object by navigating forward (next, first child etc).
  *
  * This struct also contains a `startIsActive` boolean,
  * to communicate if the start of the selection is the active point or not. 
@@ -77,7 +77,7 @@ import "AccessibleText.idl";
  * expand or collapse the range.
  * The anchor point is  the other point of the range and typically remains constant.
  * In most cases, anchor is the start of the range
- * and active is the end. However, in case of selection, when selecting
+ * and active is the end. However, when selecting
  * backwards (e.g. pressing shift+left arrow in a text field), the start of
  * the range is the active point, as the user moves this to manipulate
  * the selection.
@@ -94,7 +94,7 @@ typedef struct IA2TextSelection {
  * @brief an interface to get and set text selections in a document.
  * this interface can be supported on any object
  * that also supports
- * the IAccessibleText and or IAccessibleHypertext interfaces.
+ * the IAccessibleText and/or IAccessibleHypertext interfaces.
  * This could be a document, any subtree of a document,
  * or a text input control.
 */
@@ -107,7 +107,7 @@ interface IAccessibleTextSelectionContainer : IUnknown
      The array of selections, allocated by the server. The client must
      free it with CoTaskMemFree.
      The selections returned will be cropped to fit entirely within this subtree,
-     I.e. only reference descendant objects,
+     i.e. to only reference descendant objects,
      even if the physical selection may reach outside of this subtree.
      In the case where the physical selection is entirely outside the subtree,
      an empty array will be returned.
