@@ -57,26 +57,26 @@ import "oleacc.idl";
 import "AccessibleText.idl";
 
 /**
- * This structure represents a single  text selection within an accessibility subtree.
- * This could be within a document, or the subtree of a document.
- * This selection is defined by two points in the content, where each one is defined by an accessible
- * object supporting the IAccessibleTextInterface
- * and an IAccessibleText character offset relative to it.
- *
- * The end object must appear after the start object in the accessibility tree,
- * i.e. the end object must be reachable from the start object by navigating forward (next, first child etc).
- *
- * This struct also contains a `startIsActive` boolean,
- * to communicate if the start of the selection is the active point or not. 
- * 
- * The active point corresponds to the user's focus or point of interest. The user moves the active point to
- * expand or collapse the range.
- * The anchor point is  the other point of the range and typically remains constant.
- * In most cases, anchor is the start of the range
- * and active is the end. However, when selecting
- * backwards (e.g. pressing shift+left arrow in a text field), the start of
- * the range is the active point, as the user moves this to manipulate
- * the selection.
+ This structure represents a single  text selection within an accessibility subtree.
+ This could be within a document, or the subtree of a document.
+ This selection is defined by two points in the content, where each one is defined by an accessible
+ object supporting the IAccessibleTextInterface
+ and an IAccessibleText character offset relative to it.
+ 
+ The end object must appear after the start object in the accessibility tree,
+ i.e. the end object must be reachable from the start object by navigating forward (next, first child etc).
+ 
+ This struct also contains a `startIsActive` boolean,
+ to communicate if the start of the selection is the active point or not. 
+ 
+ The active point corresponds to the user's focus or point of interest. The user moves the active point to
+ expand or collapse the range.
+ The anchor point is  the other point of the range and typically remains constant.
+ In most cases, anchor is the start of the range
+ and active is the end. However, when selecting
+ backwards (e.g. pressing shift+left arrow in a text field), the start of
+ the range is the active point, as the user moves this to manipulate
+ the selection.
  */
 typedef struct IA2TextSelection {
   IAccessibleText* startObj;
@@ -87,19 +87,19 @@ typedef struct IA2TextSelection {
 } IA2TextSelection;
 
 /**
- * @brief an interface to get and set text selections in a document.
- * this interface can be supported on any object
- * that also supports
- * the IAccessibleText and/or IAccessibleHypertext interfaces.
- * This could be a document, any subtree of a document,
- * or a text input control.
+ @brief an interface to get and set text selections in a document.
+ this interface can be supported on any object
+ that also supports
+ the IAccessibleText and/or IAccessibleHypertext interfaces.
+ This could be a document, any subtree of a document,
+ or a text input control.
 */
 [object, uuid(2118B599-733F-43D0-A569-0B31D125ED9A)]
 interface IAccessibleTextSelectionContainer : IUnknown
 {
   /**
-   * @brief Returns an array of selections within this subtree.
-   * @param [out] selections
+   @brief Returns an array of selections within this subtree.
+   @param [out] selections
      The array of selections, allocated by the server. The client must
      free it with CoTaskMemFree.
      The selections returned will be cropped to fit entirely within this subtree,
@@ -107,10 +107,10 @@ interface IAccessibleTextSelectionContainer : IUnknown
      even if the physical selection may reach outside of this subtree.
      In the case where the physical selection is entirely outside the subtree,
      an empty array will be returned.
-   * @param [out] nSelections
+   @param [out] nSelections
      the array length
-   * @retval S_OK
-   * @retval S_FALSE returned if there are no selections within this subtree,
+   @retval S_OK
+   @retval S_FALSE returned if there are no selections within this subtree,
    or the physical selection is entirely outside of this subtree.
   */
   [propget] HRESULT selections
@@ -120,18 +120,18 @@ interface IAccessibleTextSelectionContainer : IUnknown
     );
 
   /**
-   * @brief makes 1 or more selections within this subtree 
+   @brief makes 1 or more selections within this subtree 
    denoted by the given array of IA2TextSelections.
    Any existing physical selection (inside or outside this subtree) is replaced by the new selections.
    All objects within the given selection ranges must be descendants of this subtree,
    otherwise E_INVALIDARG will be returned.
-   * @param [in] nSelections
-   *     The length of the array containing the selection ranges.
-   * @param [in] selections
-   *     The array of selection ranges.
-   * @retval S_OK Returned if the selections were made successfully.
-   * @retval S_FALSE Returned if the selections could not be made.
-   * @retval E_INVALIDARG Returned if any of the input arguments are invalid,
+   @param [in] nSelections
+     The length of the array containing the selection ranges.
+   @param [in] selections
+     The array of selection ranges.
+   @retval S_OK Returned if the selections were made successfully.
+   @retval S_FALSE Returned if the selections could not be made.
+   @retval E_INVALIDARG Returned if any of the input arguments are invalid,
    or any of the objects in the given ranges are outside of this subtree.
    */
   HRESULT setSelections
