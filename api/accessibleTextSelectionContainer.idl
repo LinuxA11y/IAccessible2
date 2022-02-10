@@ -57,21 +57,25 @@ import "oleacc.idl";
 import "AccessibleText.idl";
 
 /**
- This structure represents a single  text selection within an accessibility subtree.
+ This structure represents a single  text selection
+ within an accessibility subtree.
  This could be within a document, or the subtree of a document.
- This selection is defined by two points in the content, where each one is defined by an accessible
- object supporting the IAccessibleTextInterface
+ This selection is defined by two points in the content,
+ where each one is defined by an accessible object
+ supporting the IAccessibleTextInterface
  and an IAccessibleText character offset relative to it.
  
  The end object must appear after the start object in the accessibility tree,
- i.e. the end object must be reachable from the start object by navigating forward (next, first child etc).
+ i.e. the end object must be reachable from the start object
+ by navigating forward (next, first child etc).
  
  This struct also contains a `startIsActive` boolean,
  to communicate if the start of the selection is the active point or not. 
  
- The active point corresponds to the user's focus or point of interest. The user moves the active point to
- expand or collapse the range.
- The anchor point is  the other point of the range and typically remains constant.
+ The active point corresponds to the user's focus or point of interest.
+ The user moves the active point to expand or collapse the range.
+ The anchor point is  the other point of the range
+ and typically remains constant.
  In most cases, anchor is the start of the range
  and active is the end. However, when selecting
  backwards (e.g. pressing shift+left arrow in a text field), the start of
@@ -102,10 +106,12 @@ interface IAccessibleTextSelectionContainer : IUnknown
    @param [out] selections
      The array of selections, allocated by the server. The client must
      free it with CoTaskMemFree.
-     The selections returned will be cropped to fit entirely within this subtree,
+     The selections returned will be cropped
+	 to fit entirely within this subtree,
      i.e. to only reference descendant objects,
      even if the physical selection may reach outside of this subtree.
-     In the case where the physical selection is entirely outside the subtree,
+     In the case where the physical selection
+     is entirely outside the subtree,
      an empty array will be returned.
    @param [out] nSelections
      the array length
@@ -122,8 +128,10 @@ interface IAccessibleTextSelectionContainer : IUnknown
   /**
    @brief makes 1 or more selections within this subtree 
    denoted by the given array of IA2TextSelections.
-   Any existing physical selection (inside or outside this subtree) is replaced by the new selections.
-   All objects within the given selection ranges must be descendants of this subtree,
+   Any existing physical selection (inside or outside this subtree)
+   is replaced by the new selections.
+   All objects within the given selection ranges
+   must be descendants of this subtree,
    otherwise E_INVALIDARG will be returned.
    @param [in] nSelections
      The length of the array containing the selection ranges.
