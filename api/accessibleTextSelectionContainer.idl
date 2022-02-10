@@ -61,11 +61,7 @@ import "AccessibleText.idl";
  * This could be within a document, or the subtree of a document.
  * This selection is defined by two points in the content, where each one is defined by an accessible
  * object supporting the IAccessibleTextInterface
- * and a character offset relative to it.
- *
- * These objects may represent text leaf nodes,
- * or nodes that may embed further rich content.
- * In the latter case, the object would also support the IAccessibleHypertext interface.
+ * and an IAccessibleText character offset relative to it.
  *
  * The end object must appear after the start object in the accessibility tree,
  * i.e. the end object must be reachable from the start object by navigating forward (next, first child etc).
