@@ -11,6 +11,6 @@ fi
 # The order is important.
 # - AccessibleRelation must be before Accessible2
 # - IA2TypeLibrary.idl must be at the end
-cat IA2CommonTypes.idl AccessibleRelation.idl AccessibleAction.idl AccessibleRole.idl AccessibleStates.idl Accessible2.idl Accessible2_2.idl Accessible2_3.idl AccessibleComponent.idl AccessibleValue.idl AccessibleText.idl AccessibleText2.idl AccessibleEditableText.idl AccessibleHyperlink.idl AccessibleHypertext.idl AccessibleHypertext2.idl AccessibleTable.idl AccessibleTable2.idl AccessibleTableCell.idl AccessibleImage.idl AccessibleEventID.idl AccessibleApplication.idl AccessibleDocument.idl  IA2TypeLibrary.idl | sed -e 's/import "[A-Za-z0-9].*$//g' - | cat api_all_headers.idl - > ../ia2_api_all.idl
+cat IA2CommonTypes.idl AccessibleRelation.idl AccessibleAction.idl AccessibleRole.idl AccessibleStates.idl Accessible2.idl Accessible2_2.idl AccessibleComponent.idl AccessibleValue.idl AccessibleText.idl AccessibleText2.idl AccessibleTextSelectionContainer.idl AccessibleEditableText.idl AccessibleHyperlink.idl AccessibleHypertext.idl AccessibleHypertext2.idl AccessibleTable.idl AccessibleTable2.idl AccessibleTableCell.idl AccessibleImage.idl AccessibleEventID.idl AccessibleApplication.idl AccessibleDocument.idl  IA2TypeLibrary.idl | sed -e 's/import "[A-Za-z0-9].*$//g' - | cat api_all_headers.idl - > ../ia2_api_all.idl
 
 cd ..
