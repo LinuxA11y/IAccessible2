@@ -82,7 +82,7 @@ typedef struct IA2TextSelection {
   long startOffset;
   IAccessibleText* endObj;
   long endOffset;
-  bool startIsActive;
+  boolean startIsActive;
 } IA2TextSelection;
 
 /**
