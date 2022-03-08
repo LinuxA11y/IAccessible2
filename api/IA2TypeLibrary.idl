@@ -87,7 +87,7 @@ library IAccessible2Lib
     interface IAccessibleTableCell;
     interface IAccessibleText;
     interface IAccessibleText2;
-	IAccessibleTextSelectionContainer;
+	interface IAccessibleTextSelectionContainer;
     interface IAccessibleValue;
     enum IA2CoordinateType;
     enum IA2EventID;
