@@ -62,7 +62,7 @@ import "IA2CommonTypes.idl";
  Please also refer to the IAccessibleTableCell interface.
 
  If you want to support older applications you should also support the
-  IAccessibleTable inteface.
+  IAccessibleTable interface.
 */
 [object, uuid(6167f295-06f0-4cdd-a1fa-02e25153d869)]
 interface IAccessibleTable2 : IUnknown

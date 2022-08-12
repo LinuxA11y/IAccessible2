@@ -8,7 +8,7 @@
 	* api\Accessible2.idl
 	- Add reference to the new IA2Actions enum.
 	- Mark IAccessibleTable as being deprecated.
-	- Update the documentation on the extaneous [in] parameters of
+	- Update the documentation on the extraneous [in] parameters of
 	  IAccessible2's maxExtendedStates and maxLocalizedExtendedStates methods,
 	  and IAccessibleAction's keyBinding method.
 	- Update the copyright date.

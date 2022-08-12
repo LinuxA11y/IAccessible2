@@ -319,7 +319,7 @@ enum IA2Role {
 
   /** A run of content that is marked or highlighted, such as for reference
    purposes, or to call it out as having a special purpose that is clear from
-   context. If the mark is used in conjuction with a related content section
+   context. If the mark is used in conjunction with a related content section
    in the document, then IA2_RELATION_DETAILS should be used to link the
    related content (and the reverse relation IA2_RELATION_DETAILS_FOR should
    link back to the IA2_ROLE_MARK object). If the mark has related information

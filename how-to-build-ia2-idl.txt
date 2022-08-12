@@ -45,7 +45,7 @@ How to build the IA2 docs, a merged IDL file, a zip file containing the docs and
   - sh buildapi.sh >sh.out
   - notepad sh.out (to check for errors)
   - exit cygwin
-  - the doxgen generated files, merged idl file, and the zip file will be built
+  - the doxygen generated files, merged idl file, and the zip file will be built
   - move to the IDL-Test directory
   - activate the sln file
   - There are two projects, one for the individual idl files, one for the merged idl file
@@ -54,13 +54,13 @@ How to build the IA2 docs, a merged IDL file, a zip file containing the docs and
   - If there were errors, rebuild the merged file by rerunning buildapi.sh
   - Build, Batch Build, Choose the merged IDL project
   - Fix any errors in the original source IDLs or buildapi.sh that caused the problem
-  - Rerun the builapi.sh build script.
+  - Rerun the buildapi.sh build script.
   Note: Don't fix errors in the merged file; fix them in the correct source file.
 - Build the proxy DLL
   - Use resedit and update the version number of IAccessible2Proxy.rc
     - You will have to point resedit at the windows.h file from a Windows SDK
     - I used the SDK for v7.1A
-  - Use Visual Sudio 2012 Express Edition to build the solution.
+  - Use Visual Studio 2012 Express Edition to build the solution.
   - Put the project files on the web site:
     - IAccessible2Proxy.def
     - IAccessible2Proxy.rc
