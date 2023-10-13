@@ -77,7 +77,7 @@ interface IAccessible2_2 : IAccessible2
    @retval E_INVALIDARG if bad [in] passed.
    @note The output value is a VARIANT.  Typically it will be a VT_BSTR, but there
      are some cases where it will be a VT_I4 or VT_BOOL.  Refer to the <a href=
-     "http://www.linuxfoundation.org/collaborate/workgroups/accessibility/iaccessible2/objectattributesIAccessible2">
+     "https://wiki.linuxfoundation.org/accessibility/iaccessible2/objectattributes">
      Object Attributes specification</a> for more information.
   */
   [propget] HRESULT attribute
