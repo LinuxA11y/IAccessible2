@@ -26,6 +26,12 @@ SPDX-License-Identifier: CC-BY-NC-SA-4.0
 
 ## Attributes
 
+### General
+
+|Name|Values|Comments|Reference|
+|---|---|---|---|
+| id|[\<string\>](http://www.w3.org/TR/REC-CSS2/syndata.html#strings)|Unique identifier for the object specified by the author. This identifier remains the same across different sessions of the same application, regardless of the UI language.|[HTML5: Edition for Web Authors, section 3.2.3.1](https://www.w3.org/TR/2011/WD-html5-author-20110809/global-attributes.html#the-id-attribute)|
+
 ### List
 
 Bulleted and numbered lists have been implemented in two different ways in IAccessible2 implementations.
