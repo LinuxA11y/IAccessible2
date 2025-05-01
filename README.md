@@ -9,9 +9,5 @@ in MSAA while also providing an Assistive Technology (AT) access to rich documen
 The additional functionality includes support for rich text, tables, spreadsheets, Web 2.0 applications, and other
 large mainstream applications.
 
-# Useful links
-* [Object attributes](https://wiki.linuxfoundation.org/accessibility/iaccessible2/objectattributes) former references
-* [Text attributes](https://wiki.linuxfoundation.org/accessibility/iaccessible2/textattributes) former references
-
 # Build ia2_api_all.idl for your project
 Run ```concatidl.sh```

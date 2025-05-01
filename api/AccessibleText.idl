@@ -181,8 +181,8 @@ interface IAccessibleText : IUnknown
     attributes match those of offset. (0 based)
    @param [out] textAttributes  
     A string of attributes describing the text.  The attributes are described in the
-    <a href="https://wiki.linuxfoundation.org/accessibility/iaccessible2/textattributes">
-    text attributes specification</a> on the %IAccessible2 web site.
+    <a href="https://github.com/LinuxA11y/IAccessible2/blob/master/spec/textattributes.md">
+    text attributes specification</a>.
    @retval S_OK
    @retval S_FALSE if there is nothing to return, [out] values are 0s and NULL respectively 
    @retval E_INVALIDARG if bad [in] passed
