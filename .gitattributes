@@ -1,4 +1,5 @@
 .gitattributes text
+.gitignore text
 *.idl text
 *.txt text
 *.html text
@@ -10,3 +11,4 @@
 *.sln eol=crlf
 *.def eol=crlf
 *.rc eol=crlf
+sconstruct text

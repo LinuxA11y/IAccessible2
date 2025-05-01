@@ -1,0 +1,116 @@
+# Copyright (C) 2006-2025 NV Access Limited, Mozilla Corporation
+# This file may be used under the terms of the GNU General Public License, version 2 or later.
+# For more details see: https://www.gnu.org/licenses/gpl-2.0.html
+# Most of this code is borrowed from NVDA: https://github.com/nvaccess/nvda
+
+import multiprocessing
+import re
+
+env = DefaultEnvironment(tools=["midl", "msvc", "mslink"])
+
+# Make sure to run the build on multiple threads so it runs faster
+env.SetOption('num_jobs', multiprocessing.cpu_count())
+print("Building using {} jobs".format(env.GetOption('num_jobs')))
+
+def clsidStringToCLSIDDefine(clsidString):
+	"""
+	Converts a CLSID string of the form "{abcdef12-abcd-abcd-abcd-abcdef123456}"
+	Into a c-style struct initializer for initializing a GUID (I.e. "{0xabcdef12,0xabcd,0xabcd,{0xab,0xcd,0xab,0xcd,0xef,0x12,0x34,0x56}}")
+	"""
+	d = clsidString[1:-1].replace("-", "")
+	return "{%s,%s,%s,%s}" % (
+		"0x" + d[0:8],
+		"0x" + d[8:12],
+		"0x" + d[12:16],
+		"{%s}" % (",".join("0x" + d[x : x + 2] for x in range(16, 32, 2))),
+	)
+
+
+def COMProxyDllBuilder(env, target, source, proxyClsid):
+	"""
+	Builds a COM proxy dll from iid, proxy and dlldata c files generated from an IDL file with MIDL.
+	It provides the needed linker flags, and also embeds a manifest in the dll registering the given proxy CLSID for this dll's class object.
+	"""
+	proxyName = str(target)
+	proxyDll = env.SharedLibrary(
+		target=target,
+		source=source,
+		LIBS=["rpcrt4", "oleaut32", "ole32"],
+		CPPDEFINES=[
+			"WIN32",
+			("PROXY_CLSID_IS", clsidStringToCLSIDDefine(proxyClsid)),
+			"REGISTER_PROXY_DLL",
+		],
+		LINKFLAGS=[
+			env["LINKFLAGS"],
+			"/export:DllGetClassObject,private",
+			"/export:DllCanUnloadNow,private",
+			"/export:GetProxyDllInfo,private",
+			"/export:DllRegisterServer,private",
+			"/export:DllUnregisterServer,private",
+		],
+	)
+	return proxyDll
+
+
+env.AddMethod(COMProxyDllBuilder, "COMProxyDll")
+
+# We want a single merged IDL, rather than the separate IDL files in the IA2 source.
+RE_IDL_IMPORT = re.compile(r'import "[A-Z].*$', re.M)
+
+
+def buildMergedIdl(target, source, env):
+	outFile = open(str(target[0]), "w")
+	# The first source is a header and should be included unmodified.
+	inFile = open(str(source[0]), "r")
+	outFile.write(inFile.read())
+	outFile.write("\n")
+	for idl in source[1:]:
+		# This source should be included with import statements removed.
+		inFile = open(str(idl), "r")
+		outFile.write(RE_IDL_IMPORT.sub("", inFile.read()))
+		outFile.write("\n")
+	return None
+
+
+idlDir = env.Dir("#api")
+idlFiles = [
+	# This file contains the header for the merged IDL.
+	"api_all_headers.idl",
+	# These files must be ordered based on dependencies.
+	# The order should not be changed without confirming dependencies first.
+	"IA2CommonTypes.idl",
+	"AccessibleRelation.idl",
+	"AccessibleAction.idl",
+	"AccessibleRole.idl",
+	"AccessibleStates.idl",
+	"Accessible2.idl",
+	"Accessible2_2.idl",
+	"AccessibleComponent.idl",
+	"AccessibleValue.idl",
+	"AccessibleText.idl",
+	"AccessibleText2.idl",
+	"AccessibleEditableText.idl",
+	"AccessibleHyperlink.idl",
+	"AccessibleHypertext.idl",
+	"AccessibleHypertext2.idl",
+	"AccessibleTable.idl",
+	"AccessibleTable2.idl",
+	"AccessibleTableCell.idl",
+	"AccessibleImage.idl",
+	"AccessibleEventID.idl",
+	"AccessibleApplication.idl",
+	"AccessibleDocument.idl",
+	"AccessibleTextSelectionContainer.idl",
+	"IA2TypeLibrary.idl",
+]
+idlFile = env.Command("build/ia2.idl", [idlDir.File(idl) for idl in idlFiles], buildMergedIdl)
+
+tlbFile, headerFile, iidSourceFile, proxySourceFile, dlldataSourceFile = env.TypeLibrary(source=idlFile)
+
+proxyDll = env.COMProxyDll(
+	target="build/IAccessible2proxy",
+	source=[iidSourceFile, proxySourceFile, dlldataSourceFile],
+	# This CLSID must be unique to this dll. A new one can be generated with import comtypes; comtypes.GUID.create_new()
+	proxyClsid="{FE0CD902-FC3D-4152-9447-28F7699CA5B7}",
+)
