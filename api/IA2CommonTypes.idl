@@ -129,7 +129,29 @@ enum IA2ScrollType {
    substring may be scrolled to the closest edge, the furthest edge, or midway
    between those two edges.
   */
-  IA2_SCROLL_TYPE_ANYWHERE
+  IA2_SCROLL_TYPE_ANYWHERE,
+
+  /** Scroll the object or substring such that the middle of the object (and as
+   much as possible of the rest of the object or substring) is at the middle
+   of the top level window.  In cases where there is a hierarchy of nested
+   scrollable controls, more than one control may have to be scrolled.
+  */
+  IA2_SCROLL_TYPE_MIDDLE,
+
+  /** Scroll the object or substring such that the horizontal middle of the
+   object (and as much as possible of the rest of the object or substring) is
+   at the horizontal middle of the top level window.  In cases where there is a
+   hierarchy of nested scrollable controls, more than one control may have to be
+   scrolled.
+  */
+  IA2_SCROLL_TYPE_HORIZONTAL_MIDDLE,
+
+  /** Scroll the object or substring such that the vertical middle of the object
+   (and as much as possible of the rest of the object or substring) is at the
+   vertical middle of the top level window.  In cases where there is a hierarchy
+   of nested scrollable controls, more than one control may have to be scrolled.
+  */
+  IA2_SCROLL_TYPE_VERTICAL_MIDDLE
 };
 
 /** These constants define which coordinate system a point is located in.
